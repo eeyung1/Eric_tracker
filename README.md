@@ -18,20 +18,20 @@ Next.js App Router + Neon PostgreSQL + Vercel. Neon replaces the Supabase databa
 - [x] Six automated security/validation tests and a successful local production build.
 - [x] Dedicated Neon project, production branch, and isolated development branch; development schema seeded.
 - [ ] Complete the database-backed HTTP acceptance suite (`tests/integration.mjs`). Local database DNS/network access is unavailable in the current execution environment.
-- [ ] GitHub CI green. Initial scaffold workflows failed before any job steps; no job logs were available. The exact cause is not verified.
-- [ ] Configure Vercel credentials, deploy, and verify production.
-- [ ] Grant Vercel GitHub access to this private repository for automatic deployments.
+- [x] GitHub CI passed before merging PRs #1 and #2.
+- [x] Production credentials configured by the owner; Vercel production deployment is live and public state reads return 200. Admin write routes return 401 without a session. Full admin/comment write acceptance remains pending.
+- [x] Vercel GitHub connection and automatic production deployment verified on PR #2.
 - [ ] Configure the agreed cash value per point. The specification does not provide an exchange rate; the UI shows “Not set” rather than inventing one.
 
 ## Infrastructure
 
 - Neon organization: Emmanuel (`org-snowy-math-72907640`), existing Free organization.
 - Neon project: Eric Tracker (`nameless-star-01389089`), Frankfurt.
-- Production branch: `br-spring-surf-b98o4fm2`, database `eric_tracker` (schema not yet applied).
+- Production branch: `br-spring-surf-b98o4fm2`, database `eric_tracker` (schema and eleven default categories applied).
 - Development branch: `br-quiet-paper-b9our5gh`, database `eric_tracker` (schema and default categories applied; no points or comments seeded).
-- Vercel project: `eric-tracker` (`prj_uC2J6Aa3r6JrAwAj7boz0dRvaMgO`). No deployment exists yet. Deployment protection remains enabled.
+- Vercel project: `eric-tracker` (`prj_uC2J6Aa3r6JrAwAj7boz0dRvaMgO`). Production is live at https://eric-tracker.vercel.app/. Vercel Authentication is disabled as authorized by the owner.
 
-Credential transfer to Vercel and disabling deployment protection were blocked by automatic approval review pending explicit user authorization. An explicit Vercel team-scoped deployment request also returned 403. No production functionality has been verified.
+The owner entered production credentials directly in Vercel. Production public access, database-backed state reads, and unsigned admin-write rejection were verified. Admin login and successful comment/ledger writes still need end-to-end acceptance testing.
 
 ## Setup
 
@@ -58,12 +58,13 @@ The integration suite starts a production Next.js server and exercises public st
 
 ## Pages
 
-The public tracker is `/`, with no admin access card, login link, or management panels, including for signed-in admins. Admins navigate directly to `/admin` to sign in and manage points, criteria, and redemptions. The admin page is marked noindex; every write still verifies the signed session server-side.
+The public tracker is `/`, with an overview, available/lifetime/redeemed point summaries, reward progress, activity filters, history, and public comments. It has no admin access card, login link, or management panels, including for signed-in admins. The read-only `/criteria` page lists current database criteria, points, and confirmation requirements with search and an explanation of the point system. Both pages share public navigation and light/dark theme support. Admins navigate directly to `/admin` to sign in and manage points, criteria, and redemptions. The admin page is marked noindex; every write still verifies the signed session server-side.
 
 ## API
 
 | Method | Route | Access |
 |---|---|---|
+| GET | `/api/criteria` | Public; returns only current criteria, points, and confirmation flags |
 | GET | `/api/state` | Public; includes the current admin identity when signed in |
 | POST | `/api/login`, `/api/logout` | Public login / clears browser session |
 | POST | `/api/comments` | Public, 20 attempts per IP per 15 minutes |
@@ -74,6 +75,6 @@ Entry and redemption writes require a unique `requestId`; the UI retains it for 
 
 ## Reward rules and public access
 
-The progress target is 20 points, matching the reference. No cash conversion is assumed. Streak bonuses are logged manually by admins; automatic streak detection was not specified. Dates default to Africa/Lagos. Everyone with the live link can see names, notes, and comments: do not post sensitive personal information.
+The progress target is 20 points, matching the reference. No cash conversion is assumed; the redesigned public summary shows redeemed points instead of an unconfigured currency estimate. Streak bonuses are logged manually by admins; automatic streak detection was not specified. Dates default to Africa/Lagos. Everyone with the live link can see names, notes, and comments: do not post sensitive personal information.
 
 After deployment, confirm unsigned writes return 401, log in as both admins, test comments, and verify edits/removal do not rewrite history. Use the isolated development branch for destructive tests. Public production access also requires the project deployment-protection setting to allow visitors, with user authorization.
