@@ -13,3 +13,5 @@ This project uses Next.js 16.4.2. Read the relevant guides in `node_modules/next
 The public `/` page must never show an admin login card, login link, or management controls. Admin access and controls belong only at `/admin`, even when the visitor is already signed in.
 
 Public criteria are read-only at `/criteria`, loaded from `/api/criteria`; never hardcode the category catalog or grant public write access. Keep public navigation free of admin links.
+
+The admin workspace uses Record activity, Manage criteria, History, and Comments sections behind the existing signed session. Keep its visual design consistent with the public pages. Database reset requests must specify scope; the owner authorized an activity-only reset on 19 October 2026, preserving criteria and credentials. Do not repeat that maintenance action without a new request.

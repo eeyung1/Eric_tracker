@@ -9,10 +9,10 @@ async function request(path, body, signal) {
  if(!response.ok) throw new Error(data.error || 'Please try again in a moment.');
  return data;
 }
-function Comment({comment}) {
+export function Comment({comment}) {
  return <article className="public-comment"><div className="public-comment-head"><strong>{comment.author_name}</strong><time dateTime={comment.created_at}>{dateLabel(comment.created_at)}</time></div><p>{comment.body}</p></article>;
 }
-function CommentForm({entryId, onAdded}) {
+export function CommentForm({entryId, onAdded}) {
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[success,setSuccess]=useState('');
  async function submit(event) {
   event.preventDefault();const form=event.currentTarget,values=new FormData(form);setBusy(true);setError('');setSuccess('');
