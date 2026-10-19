@@ -9,3 +9,5 @@ All writes must enforce admin authorization server-side, except public comments.
 ## Next.js version
 
 This project uses Next.js 16.4.2. Read the relevant guides in `node_modules/next/dist/docs/` before changing framework behavior. Request APIs such as `cookies()` and route `params` are asynchronous. Honor generated framework guidance.
+
+The public `/` page must never show an admin login card, login link, or management controls. Admin access and controls belong only at `/admin`, even when the visitor is already signed in.
