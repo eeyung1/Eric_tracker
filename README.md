@@ -56,6 +56,10 @@ node tests/integration.mjs
 
 The integration suite starts a production Next.js server and exercises public state/comments, both admins, unsigned writes, tampered sessions, confirmation, snapshots, duplicate retries, category removal, and concurrent redemptions. It writes test records, so never run it against production. To target an already running development deployment, set `TEST_API_BASE` and supply its test credentials privately.
 
+## Pages
+
+The public tracker is `/`, with no admin access card, login link, or management panels, including for signed-in admins. Admins navigate directly to `/admin` to sign in and manage points, criteria, and redemptions. The admin page is marked noindex; every write still verifies the signed session server-side.
+
 ## API
 
 | Method | Route | Access |
