@@ -89,3 +89,9 @@ On 19 October 2026, the owner selected an activity-only production reset. Entrie
 The owner selected a learning-journey focus. The homepage is statically rendered and uses CSS artwork without external images or font downloads. A small client component fetches /api/journey once on load and refreshes when the page regains focus; it does not load the full comments/history payload or poll in the background. The endpoint returns aggregate totals and only the latest three activities, without notes, confirmation names, or admin identities. Existing records, criteria, and admin sessions are unchanged.
 
 Routes: `/` personal homepage; `/tracker` growth tracker and public comments; `/criteria` live read-only criteria guide; `/admin` authenticated management. The planned custom domain is `ericuahie.com`. It has not been purchased or attached by this implementation; use the current Vercel address until the owner purchases it and DNS is connected. Do not publish a guessed biography, school, age, photos, contact details, or unverified achievements.
+
+## Playful motion and interaction
+
+The personal homepage includes a lightweight CSS learning buddy with a keyboard/touch high-five button and encouraging messages. This interaction never adds points or changes database records. Decorative stickers, orbit lines, a short wave, progress transitions, and section reveals use CSS transforms and opacity; no video, canvas loop, animation library, audio, or external imagery is required.
+
+Public navigation includes a persistent Pause motion control. System reduced-motion settings always suppress decorative animation and confetti. Decorative animation pauses when the tab is hidden, and the hero pauses when offscreen. Scroll-reveal content remains visible with JavaScript unavailable, with motion paused, and with reduced motion enabled. Controls retain visible keyboard focus and touch-friendly targets.
