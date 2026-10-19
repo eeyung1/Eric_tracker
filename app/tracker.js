@@ -33,7 +33,7 @@ export default function Tracker({ adminPage = false }) {
  async function login(event){event.preventDefault();const values=new FormData(event.currentTarget);await action(async()=>{await api('login','POST',{name:values.get('name'),password:values.get('password')});},'Admin access unlocked.');}
  async function addEntry(event){event.preventDefault();const form=event.currentTarget,values=new FormData(form);const requestId=form.dataset.requestId||(form.dataset.requestId=crypto.randomUUID());await action(async()=>{await api('entries','POST',{categoryId:selected.id,note:values.get('note'),confirmedBy:values.get('confirmedBy'),requestId});form.reset();delete form.dataset.requestId;},'Points logged.');}
  async function redeem(event){event.preventDefault();const form=event.currentTarget,values=new FormData(form);const requestId=form.dataset.requestId||(form.dataset.requestId=crypto.randomUUID());await action(async()=>{await api('redemptions','POST',{points:Number(values.get('points')),note:values.get('note'),requestId});setRedeemOpen(false);},'Redemption logged.');}
- return <main>
+ return <main className="admin-shell">
   <div className="heading"><h1>🎯 Eric&apos;s Growth Track</h1><label className="theme-label">Theme<select value={theme} onChange={e=>{const value=e.target.value;setTheme(value);localStorage.setItem('eric-theme',value);if(value==='system')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=value;}}><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></div>
   <p className="sub">Evening sessions, assignments, and class confidence — tracked here.</p>
   {adminPage && <p><a href="/">View public tracker</a></p>}
