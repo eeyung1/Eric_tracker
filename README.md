@@ -1,6 +1,6 @@
-# Eric's Growth Track
+# Eric — A Learning Journey
 
-A small accountability tracker for Eric: Emmanuel and Mr. Greg log points and rewards; anyone with the link can read the history and leave general or entry-specific comments.
+Eric’s personal learning website, with a dedicated growth tracker. The homepage introduces the learning journey and displays live progress; Emmanuel and Mr. Greg manage points and rewards through /admin. Visitors can read activities and leave encouragement on the tracker.
 
 ## Stack and current status
 
@@ -58,12 +58,13 @@ The integration suite starts a production Next.js server and exercises public st
 
 ## Pages
 
-The public tracker is `/`, with an overview, available/lifetime/redeemed point summaries, reward progress, activity filters, history, and public comments. It has no admin access card, login link, or management panels, including for signed-in admins. The read-only `/criteria` page lists current database criteria, points, and confirmation requirements with search and an explanation of the point system. Both pages share public navigation and light/dark theme support. Admins navigate directly to `/admin` to sign in and manage points, criteria, and redemptions. The admin page is marked noindex; every write still verifies the signed session server-side.
+The personal homepage is `/`, featuring a learning introduction, focus areas, a compact live progress snapshot, recent activities, and an encouragement link. The growth tracker is `/tracker`, with an overview, available/lifetime/redeemed point summaries, reward progress, activity filters, history, and public comments. It has no admin access card, login link, or management panels, including for signed-in admins. The read-only `/criteria` page lists current database criteria, points, and confirmation requirements with search and an explanation of the point system. Home, Growth tracker, and Point criteria share navigation and light/dark theme support. No public page links to admin access. Admins navigate directly to `/admin` to sign in and manage points, criteria, and redemptions. The admin page is marked noindex; every write still verifies the signed session server-side.
 
 ## API
 
 | Method | Route | Access |
 |---|---|---|
+| GET | `/api/journey` | Public; aggregate totals and the latest three activity labels/dates/points only |
 | GET | `/api/criteria` | Public; returns only current criteria, points, and confirmation flags |
 | GET | `/api/state` | Public; includes the current admin identity when signed in |
 | POST | `/api/login`, `/api/logout` | Public login / clears browser session |
@@ -82,3 +83,9 @@ After deployment, confirm unsigned writes return 401, log in as both admins, tes
 ## Maintenance record
 
 On 19 October 2026, the owner selected an activity-only production reset. Entries, redemptions, and comments were cleared together in a locked transaction; the eleven current criteria, rate-limit records, database schema, and existing admin credentials were preserved. Post-reset database counts were verified as zero for all three activity tables. This was a one-time authorized maintenance action, not an exposed reset endpoint.
+
+## Personal website and domain
+
+The owner selected a learning-journey focus. The homepage is statically rendered and uses CSS artwork without external images or font downloads. A small client component fetches /api/journey once on load and refreshes when the page regains focus; it does not load the full comments/history payload or poll in the background. The endpoint returns aggregate totals and only the latest three activities, without notes, confirmation names, or admin identities. Existing records, criteria, and admin sessions are unchanged.
+
+Routes: `/` personal homepage; `/tracker` growth tracker and public comments; `/criteria` live read-only criteria guide; `/admin` authenticated management. The planned custom domain is `ericuahie.com`. It has not been purchased or attached by this implementation; use the current Vercel address until the owner purchases it and DNS is connected. Do not publish a guessed biography, school, age, photos, contact details, or unverified achievements.

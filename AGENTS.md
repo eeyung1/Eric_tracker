@@ -15,3 +15,5 @@ The public `/` page must never show an admin login card, login link, or manageme
 Public criteria are read-only at `/criteria`, loaded from `/api/criteria`; never hardcode the category catalog or grant public write access. Keep public navigation free of admin links.
 
 The admin workspace uses Record activity, Manage criteria, History, and Comments sections behind the existing signed session. Keep its visual design consistent with the public pages. Database reset requests must specify scope; the owner authorized an activity-only reset on 19 October 2026, preserving criteria and credentials. Do not repeat that maintenance action without a new request.
+
+Personal-site structure: `/` is Eric’s learning-journey homepage; `/tracker` is the existing growth tracker; `/criteria` is the live guide; `/admin` remains separate. Use shared SiteHeader/SiteFooter for public navigation. The homepage uses the minimal `/api/journey` response; avoid full-state polling there. `ericuahie.com` is planned, not yet purchased or connected. Do not invent personal biography, portraits, school, age, or accomplishments.
