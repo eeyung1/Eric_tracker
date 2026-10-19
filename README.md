@@ -78,3 +78,7 @@ Entry and redemption writes require a unique `requestId`; the UI retains it for 
 The progress target is 20 points, matching the reference. No cash conversion is assumed; the redesigned public summary shows redeemed points instead of an unconfigured currency estimate. Streak bonuses are logged manually by admins; automatic streak detection was not specified. Dates default to Africa/Lagos. Everyone with the live link can see names, notes, and comments: do not post sensitive personal information.
 
 After deployment, confirm unsigned writes return 401, log in as both admins, test comments, and verify edits/removal do not rewrite history. Use the isolated development branch for destructive tests. Public production access also requires the project deployment-protection setting to allow visitors, with user authorization.
+
+## Maintenance record
+
+On 19 October 2026, the owner selected an activity-only production reset. Entries, redemptions, and comments were cleared together in a locked transaction; the eleven current criteria, rate-limit records, database schema, and existing admin credentials were preserved. Post-reset database counts were verified as zero for all three activity tables. This was a one-time authorized maintenance action, not an exposed reset endpoint.
