@@ -20,3 +20,5 @@ test('tutor page redirects unsigned visitors and hides unconfigured tutor',()=>{
  assert.match(page,/redirect\('\/student\/login'\)/);
  assert.match(page,/configured\?<StudentTutorClient\/>/);
 });
+
+test('student tutor fails closed for a learner mapping that is not Eric',()=>{assert.match(route,/learner\.display_name !== 'Eric'/);assert.doesNotMatch(route,/body\.learnerId|body\.learner/);});

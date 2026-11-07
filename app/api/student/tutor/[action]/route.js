@@ -25,7 +25,7 @@ async function handle(request,context,method){
   const guardianToken=process.env.SOTEACH_GUARDIAN_TOKEN;
   if(!learnerId||!guardianToken)throw new HttpError(503,'Tutoring setup is incomplete.');
   const learner=await findTutorLearner(learnerId);
-  if(!learner?.soteach_learner_key)throw new HttpError(503,'Tutoring setup is incomplete.');
+  if(!learner?.soteach_learner_key || learner.display_name !== 'Eric')throw new HttpError(503,'Tutoring setup is incomplete.');
   const result=await requestSoTeach({
    learner:learner.soteach_learner_key,
    guardianToken,

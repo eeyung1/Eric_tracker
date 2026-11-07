@@ -148,3 +148,5 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [x] Tutoring schema tested on an isolated Neon branch (`tutoring-migration-validation-20261107`); production migration is a separate deployment step.
 
 - [x] SoTeach transport supports strict `https://<render-host>/internal/` private API prefix, matching SoTeach server routing; arbitrary path prefixes remain rejected.
+
+- [x] Provisioned Eric's learner record in production Neon and configured server-only `ERIC_TUTOR_LEARNER_ID` in Vercel; tutoring proxy also verifies resolved display name is Eric before forwarding requests. SoTeach external learner key and guardian authorization are still pending.
