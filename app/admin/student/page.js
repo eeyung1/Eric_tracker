@@ -4,6 +4,7 @@ import {redirect} from 'next/navigation';
 import {readSession,COOKIE,displayName} from '../../../lib/security.js';
 import {getPool} from '../../../lib/db.js';
 import {studentSetupReadiness} from '../../../lib/student-setup-readiness.js';
+import ConnectionCheck from './connection-check';
 export const dynamic='force-dynamic';
 export const metadata={title:'Student monitoring | Eric',robots:{index:false,follow:false}};
 
@@ -47,6 +48,7 @@ export default async function MentorStudentPage(){
     <li>End-to-end live lesson: <strong>Not yet verified</strong></li>
    </ul>
    <p style={{color:'var(--muted)',fontSize:13}}>Transport configuration does not confirm guardian consent or that the remote tutor accepts requests. Keep the integration gated until a supervised live test passes.</p>
+   <ConnectionCheck/>
   </section>
   {!summary.ready?<p role="status">The tutoring database migration has not been applied yet. No private student activity is available.</p>:
    summary.rows.length===0?<p role="status">No student learner records have been provisioned yet.</p>:
