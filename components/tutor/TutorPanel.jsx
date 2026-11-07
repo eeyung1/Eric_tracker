@@ -16,16 +16,17 @@ export default function TutorPanel({send}) {
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState('');
  const [history,setHistory]=useState([]);
+ const [lastFailed,setLastFailed]=useState(null);
 
  const resume=useCallback(async()=>{
   if (typeof send !== 'function') return;
-  setBusy(true); setError('');
+  setBusy(true); setError(''); setLastFailed(null);
   try {
    const state=tutorView(await send('session'));
    setLesson(state);
    setHistory(state.prompt?[{role:'tutor',text:state.prompt}]:[]);
   } catch(e) {
-   if (e?.status !== 404) setError(tutorErrorMessage(e));
+   if (e?.status !== 404) {setError(tutorErrorMessage(e));setLastFailed('resume');}
   } finally {setBusy(false);}
  },[send]);
  useEffect(()=>{void resume();},[resume]);
@@ -33,11 +34,11 @@ export default function TutorPanel({send}) {
  async function begin(event) {
   event.preventDefault();
   if (!topic.trim() || busy || typeof send !== 'function') return;
-  setBusy(true); setError('');
+  setBusy(true); setError(''); setLastFailed(null);
   try {
    const state=tutorView(await send('begin',{subject:subject.trim(),topic:topic.trim(),class:grade}));
    setLesson(state);setHistory(state.prompt?[{role:'tutor',text:state.prompt}]:[]);
-  } catch(e){setError(tutorErrorMessage(e));}
+  } catch(e){setError(tutorErrorMessage(e));setLastFailed('begin');}
   finally{setBusy(false);}
  }
  async function respond(event) {
@@ -49,7 +50,7 @@ export default function TutorPanel({send}) {
    const next=tutorView(await send('input',{input}));
    setHistory(previous=>[...previous,{role:'learner',text:input},...(next.prompt?[{role:'tutor',text:next.prompt}]:[])]);
    setLesson(next);setAnswer('');
-  } catch(e){setError(tutorErrorMessage(e));}
+  } catch(e){setError(tutorErrorMessage(e));setLastFailed('input');}
   finally{setBusy(false);}
  }
  return <section className={styles.panel} aria-label="Socratic tutor">
@@ -77,6 +78,7 @@ export default function TutorPanel({send}) {
    </form>}
    <button type="button" className={styles.secondary} onClick={()=>{setLesson(null);setHistory([]);setError('');}}>Choose another topic</button>
   </div>}
-  {error&&<p role="alert" className={styles.error}>{error}</p>}
+  {busy&&<p role="status" className={styles.hint}>SoTeach is processing your request. Please wait…</p>}
+  {error&&<div role="alert" className={styles.error}><p>{error}</p>{lastFailed==='resume'&&<button type="button" className={styles.secondary} onClick={()=>void resume()} disabled={busy}>Try resuming again</button>}{lastFailed==='input'&&<p>Your answer is still here. Check the lesson status with Resume before resending to avoid a duplicate answer.</p>}{lastFailed==='begin'&&<p>Your topic is saved in the form. You can try starting again.</p>}</div>}
  </section>;
 }

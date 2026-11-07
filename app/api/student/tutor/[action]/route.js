@@ -2,6 +2,8 @@ import {studentSessionFromRequest} from '../../../../../lib/student-security.js'
 import {findTutorLearner} from '../../../../../lib/tutor-learners.js';
 import {requestSoTeach,SoTeachUnavailable,SoTeachResponseError} from '../../../../../lib/soteach-client.js';
 import {sameOrigin,jsonBody,HttpError} from '../../../../../lib/validation.js';
+import {validateTutorBody} from '../../../../../lib/tutor-request-validation.js';
+import {throttleTutorRequests} from '../../../../../lib/tutor-throttle.js';
 
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
@@ -19,20 +21,21 @@ async function handle(request,context,method){
   let body;
   if(method==='POST'){
    sameOrigin(request);
-   body=await jsonBody(request);
+   body=validateTutorBody(action,await jsonBody(request));
   }
   const learnerId=process.env.ERIC_TUTOR_LEARNER_ID;
   const guardianToken=process.env.SOTEACH_GUARDIAN_TOKEN;
   if(!learnerId||!guardianToken)throw new HttpError(503,'Tutoring setup is incomplete.');
   const learner=await findTutorLearner(learnerId);
   if(!learner?.soteach_learner_key || learner.display_name !== 'Eric')throw new HttpError(503,'Tutoring setup is incomplete.');
+  await throttleTutorRequests();
   const result=await requestSoTeach({
    learner:learner.soteach_learner_key,
    guardianToken,
    action,
    body,
   });
-  return Response.json(result,{headers:{'Cache-Control':'no-store'}});
+  return Response.json(result,{headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
  }catch(error){
   let status=500;
   if(error instanceof HttpError)status=error.status;
@@ -44,8 +47,9 @@ async function handle(request,context,method){
    status===404?'Not found.':
    status===405?'Method not allowed.':
    status===400?'Invalid tutoring request.':
+   status===429?'Too many tutoring requests. Try again later.':
    status===503?'Tutoring is temporarily unavailable.':
    'Unable to complete tutoring request.';
-  return Response.json({error:message},{status,headers:{'Cache-Control':'no-store'}});
+  return Response.json({error:message},{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
  }
 }

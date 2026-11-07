@@ -162,3 +162,13 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 
 - [x] Add authenticated mentor-only SoTeach activation checklist at `/admin/student`: student sign-in configuration, private transport configuration, Eric learner mapping and explicit unverified live-test gate. Do not expose tokens or external learner keys.
 - [ ] In Render, provision a durable SoTeach guardian account and explicit consent for Eric before enabling `SOTEACH_SERVICE_TOKEN`; enabling it immediately also protects public learner routes. Provision the same 32+ character service token in Render and Vercel server-only settings, guardian bearer token in Vercel, and `SOTEACH_PRIVATE_URL=https://soteach-ai.onrender.com/internal/`. Link Eric's Neon learner record to the consented SoTeach learner key, then verify private begin/input/resume and monitor auth failures. Never commit tokens or paste them into issues.
+
+### Tutor reliability and security hardening (five-feature batch)
+
+- [x] Validate and normalize tutor `begin` and `input` payloads on the server, rejecting unknown fields, unsupported learning levels, empty text, control characters and oversized inputs.
+- [x] Apply distributed, database-backed authenticated Eric tutoring request throttling (60 requests per 15 minutes) before forwarding to Render. A single learner-wide bucket prevents forwarded-IP spoofing; this also limits rapid lesson calls.
+- [x] Return sanitized error messages, explicit 429 handling, `Cache-Control: no-store` and `X-Content-Type-Options: nosniff` for tutoring responses.
+- [x] Improve tutor recovery feedback: show processing status, allow retrying resume, preserve draft answers, and warn against blind resubmission after an ambiguous network failure.
+- [x] Add regression coverage for payload validation, cross-learner field rejection, throttling order, safe response headers and retry UX.
+
+These changes do not activate live tutoring: guardian consent, Render/Vercel service credentials, SoTeach learner mapping and supervised end-to-end acceptance remain outstanding.
