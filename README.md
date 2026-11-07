@@ -154,3 +154,6 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [x] Student dashboard setup readiness flags show a safe, non-secret pending state until tutoring credentials are configured; no guardian tokens or learner IDs are returned to the browser.
 
 - [x] Mocked private HTTP contract tests for SoTeach begin, input, resume, dual authentication headers, guardian denial and invalid upstream responses. [ ] Live cross-service acceptance remains pending Render configuration and guardian account provisioning.
+
+- [x] Embed a full SoTeach learning studio experience within the authenticated Eric Tracker `/student/tutor` route, using the shared blue/ink design system, mobile-friendly learning steps, polished session conversation and a dashboard entry point even before private integration is configured. The studio uses the secure Next.js tutoring proxy rather than embedding Render's public UI.
+- [ ] Complete Render guardian/service credentials, durable learner linking and end-to-end acceptance before enabling real lesson requests.
