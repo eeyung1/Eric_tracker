@@ -1,0 +1,22 @@
+.panel{width:100%;max-width:760px;margin:0 auto;padding:clamp(16px,4vw,28px);border:1px solid var(--border,#cbd5e1);border-radius:20px;background:var(--surface,#fff);color:var(--ink,#172033)}
+.header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.header h2{font-size:clamp(1.3rem,4vw,1.9rem);line-height:1.2;margin:4px 0}
+.eyebrow{font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;opacity:.7}
+.start,.respond,.lesson{display:grid;gap:16px}
+.start label,.respond label{display:grid;gap:6px;font-weight:600}
+.start input,.start select,.respond textarea{width:100%;min-width:0;padding:12px;border:1px solid #94a3b8;border-radius:10px;background:var(--surface,#fff);color:inherit;font:inherit}
+.respond textarea{resize:vertical}
+.primary,.secondary{min-height:44px;padding:10px 16px;border-radius:10px;font:inherit;font-weight:650;cursor:pointer}
+.primary{background:#1948a3;color:white;border:1px solid #1948a3}
+.secondary{background:transparent;color:inherit;border:1px solid #94a3b8}
+.primary:disabled,.secondary:disabled{opacity:.55;cursor:not-allowed}
+.primary:focus-visible,.secondary:focus-visible,.start input:focus-visible,.respond textarea:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.hint,.state{font-size:.9rem;opacity:.8}
+.messages{display:grid;gap:12px;max-height:55vh;overflow-y:auto;overscroll-behavior:contain;padding:8px 0}
+.messages p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;padding:14px;border-radius:14px;margin:0}
+.tutor{background:#e9f0ff;color:#14213d;justify-self:start;max-width:94%}
+.learner{background:#e6f6ec;color:#153e28;justify-self:end;max-width:94%}
+.complete{font-weight:700;color:#166534}
+.error{color:#b91c1c;font-weight:600}
+@media(max-width:480px){.panel{padding:14px;border-radius:14px}.header{align-items:center}.messages{max-height:45vh}.primary{width:100%}}
+@media(prefers-reduced-motion:reduce){.panel *{scroll-behavior:auto!important;transition:none!important}}
