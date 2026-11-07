@@ -3,13 +3,14 @@ import {cookies} from 'next/headers';
 import {redirect} from 'next/navigation';
 import {readStudentSession,STUDENT_COOKIE} from '../../../lib/student-security.js';
 import StudentTutorClient from './student-tutor-client';
+import {studentTutorAvailability} from '../../../lib/student-tutor-availability.js';
 import styles from './studio.module.css';
 export const metadata={title:'SoTeach learning studio | Eric Tracker',robots:{index:false,follow:false}};
 export const dynamic='force-dynamic';
 export default async function StudentTutorPage(){
  const store=await cookies();
  if(!readStudentSession(store.get(STUDENT_COOKIE)?.value))redirect('/student/login');
- const configured=Boolean(process.env.SOTEACH_PRIVATE_URL&&process.env.SOTEACH_SERVICE_TOKEN&&process.env.SOTEACH_GUARDIAN_TOKEN&&process.env.ERIC_TUTOR_LEARNER_ID);
+ const {available:configured}=await studentTutorAvailability();
  return <main className={styles.studio}>
   <nav className={styles.breadcrumb} aria-label="Learning studio navigation">
    <Link href="/student">← My dashboard</Link><span aria-hidden="true">/</span><span>SoTeach learning studio</span>
