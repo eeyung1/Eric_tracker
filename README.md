@@ -110,3 +110,13 @@ Public navigation includes a persistent Pause motion control. System reduced-mot
 - [ ] Complete database-backed integration and browser acceptance tests.
 
 The SoTeach backend also has a tested service-token middleware and an opt-in dual-authorization private handler. Neither is proof that the hosted Render service currently exposes the private API.
+
+### Student login security foundation
+
+- [x] Eric-specific salted scrypt password hash, signed short-lived student session, and separate HttpOnly cookie (`lib/student-security.js`).
+- [x] Password rotation invalidates existing student tokens. Admin sessions remain separate.
+- [ ] Add rate-limited, same-origin student login/logout HTTP routes and authorized student page.
+- [ ] Link authenticated Eric identity to a database learner UUID and restrict tutoring requests to it.
+- [ ] Provision a unique student password hash and session secret in Vercel environment variables. **Do not commit or share the password**.
+
+To generate a password hash locally with Node 22, use `node --input-type=module -e "import {hashStudentPassword} from './lib/student-security.js'; console.log(hashStudentPassword(process.env.STUDENT_INITIAL_PASSWORD))"` after setting `STUDENT_INITIAL_PASSWORD` in a private shell. Copy only the resulting hash into the Vercel `ERIC_STUDENT_PASSWORD_HASH` environment variable, and use an independent random `STUDENT_SESSION_SECRET` of at least 32 characters. This PR does **not** enable a student login endpoint or grant any student access.
