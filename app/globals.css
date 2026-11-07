@@ -45,3 +45,62 @@ body{max-width:1180px;padding:0 36px;padding-bottom:env(safe-area-inset-bottom,0
 :root[data-motion=paused] .buddy-confetti{display:none}
 :root[data-page-hidden=true] .public-shell *,.playful-art[data-offscreen=true] *{animation-play-state:paused!important}
 @media(prefers-reduced-motion:reduce){.public-shell *,.public-shell *::before,.public-shell *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.personal-site [data-reveal-pending=true]{opacity:1!important;transform:none!important}.buddy-confetti{display:none}}
+
+
+/* 2026 editorial redesign: shared visual language with SoTeach on Render.
+   Global tokens also harmonise tracker, criteria, student and mentor pages. */
+:root{--bg:#f7f9fc;--surface:#fff;--text:#192b42;--muted:#53667f;--line:#e0e8f2;--shadow:0 8px 28px rgba(25,59,91,.045);--accent:#235ccc;--accent-bg:#edf3ff;--green:#217960;--green-bg:#ecf8f1;--heading-font:Georgia,'Times New Roman',serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#131b27;--surface:#1b2636;--text:#e7eef8;--muted:#a5b5cb;--line:#304057;--accent:#94b7ff;--accent-bg:#23354f;--green:#8bd1b2;--green-bg:#203e36}}
+:root[data-theme=dark]{--bg:#131b27;--surface:#1b2636;--text:#e7eef8;--muted:#a5b5cb;--line:#304057;--accent:#94b7ff;--accent-bg:#23354f;--green:#8bd1b2;--green-bg:#203e36}
+body{max-width:1200px}
+.public-header{min-height:88px;padding:18px 0;border-bottom:1px solid var(--line);gap:14px}
+.public-brand{font-size:19px;letter-spacing:-.045em}
+.brand-mark{border-radius:12px;background:#235ccc;color:#fff;box-shadow:0 7px 20px rgba(35,92,204,.12)}
+.public-header nav{gap:3px;flex-wrap:wrap;align-items:center}
+.public-header nav a{font-size:12px;padding:11px 12px;border-radius:9px;white-space:nowrap}
+.public-header nav a[href="/student/login"]{background:var(--accent-bg);color:var(--accent);font-weight:750}
+.public-header nav a[href="/student/login"]:hover{background:var(--accent);color:#fff}
+.public-theme select,.motion-toggle{border-color:var(--line);border-radius:9px}
+.personal-site h1,.personal-site h2{font-family:var(--heading-font);font-weight:400;letter-spacing:-.045em}
+.personal-site .personal-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,.9fr);gap:clamp(30px,5vw,76px);align-items:center;padding:clamp(50px,8vw,106px) 0 clamp(54px,7vw,88px)}
+.personal-site .personal-hero-copy{max-width:690px}
+.personal-site .hello-pill{background:var(--green-bg);border:1px solid var(--line);border-radius:100px;color:var(--green);font-size:10px;letter-spacing:.11em;padding:10px 14px}
+.personal-site h1{font-size:clamp(3.2rem,6.3vw,5.8rem);line-height:1.05;letter-spacing:-.055em;margin:26px 0}
+.personal-site h1 em{color:var(--accent);font-style:normal}
+.personal-site .personal-hero-copy>p{max-width:550px;font-size:clamp(15px,1.5vw,17px);line-height:1.85;color:var(--muted)}
+.personal-hero-actions{gap:12px;display:flex;flex-wrap:wrap;margin-top:32px}
+.personal-site .personal-button{background:#235ccc;color:#fff;border:1px solid #235ccc;border-radius:11px;box-shadow:0 8px 20px rgba(35,92,204,.12);font-size:12px;min-height:50px;padding:12px 18px}
+.personal-site .personal-button-quiet{background:var(--surface);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.personal-site .personal-button:hover{transform:translateY(-2px)}
+.personal-site .personal-button:active{transform:translateY(0);box-shadow:none}
+.personal-site .hero-footnote{color:var(--muted);font-size:12px;margin-top:30px}
+.render-learning-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,3.2vw,38px);box-shadow:0 24px 65px rgba(25,59,91,.07);overflow:hidden}
+.render-learning-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#235ccc,#217960)}
+.render-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.render-card-emblem{width:50px;height:50px;display:grid;place-items:center;position:relative;background:#235ccc;color:#fff;border-radius:14px;font-family:Georgia,serif;font-size:33px}
+.render-card-emblem span{font:13px Arial,sans-serif;position:absolute;top:6px;right:6px}
+.render-card-tag,.render-card-kicker,.render-card-bottom{font-size:9px;font-weight:750;letter-spacing:.13em;color:var(--muted)}
+.render-card-quote{font-family:var(--heading-font);font-size:clamp(1.6rem,2.7vw,2.35rem);line-height:1.35;letter-spacing:-.035em;margin:34px 0;color:var(--text)}
+.render-card-rule{height:1px;background:var(--line)}
+.render-card-kicker{margin:27px 0 17px}
+.render-card-steps{list-style:none;display:grid;gap:18px;padding:0;margin:0 0 32px}
+.render-card-steps li{display:flex;gap:16px;align-items:center}
+.render-card-steps li>span{display:grid;place-items:center;flex:0 0 40px;height:40px;background:var(--accent-bg);color:var(--accent);border-radius:12px;font-size:12px;font-weight:700}
+.render-card-steps strong,.render-card-steps small{display:block}
+.render-card-steps strong{font-size:13px;color:var(--text)}
+.render-card-steps small{margin-top:4px;font-size:11px;color:var(--muted)}
+.render-card-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:20px}
+.personal-site .personal-values{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:transparent;padding:19px 0;font-size:11px;letter-spacing:.02em}
+.personal-site .focus-grid article,.public-panel,.public-stat,.criterion-card,.journey-metrics,.journey-recent{border:1px solid var(--line);box-shadow:var(--shadow);border-radius:17px}
+.personal-site .focus-grid article{border-top:1px solid var(--line)}
+.personal-site .focus-grid article:nth-child(2),.personal-site .focus-grid article:nth-child(3){border-top-color:var(--line)}
+.personal-site .focus-icon{background:var(--accent-bg);color:var(--accent);box-shadow:none}
+.personal-site .learning-about,.personal-site .learning-focus,.personal-site .journey-section{scroll-margin-top:90px}
+.personal-site .personal-encouragement{border-radius:20px}
+.public-footer{border-color:var(--line)}
+.public-footer nav{flex-wrap:wrap}
+.public-shell input:focus-visible,.public-shell textarea:focus-visible,.public-shell select:focus-visible{border-color:var(--accent);box-shadow:0 0 0 3px rgba(35,92,204,.13)}
+@media(max-width:1060px){.public-header{flex-wrap:wrap}.public-header nav{order:3;width:100%;justify-content:center}.site-preferences{margin-left:auto}.personal-site .personal-hero{grid-template-columns:minmax(0,1.15fr) minmax(290px,.85fr);gap:24px}}
+@media(max-width:760px){.personal-site .personal-hero{grid-template-columns:1fr;padding:42px 0 46px;gap:32px}.personal-site h1{font-size:clamp(3rem,10vw,4.5rem)}.render-learning-card{max-width:600px}.public-header nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin;padding-bottom:8px}.public-header nav a{flex:0 0 auto;white-space:nowrap}.public-header nav a[href="/student/login"]{background:var(--accent-bg)}}
+@media(max-width:480px){.personal-site .personal-hero{padding:34px 0 38px}.personal-site h1{font-size:clamp(2.7rem,12vw,3.7rem)}.personal-hero-actions{display:grid;grid-template-columns:1fr}.personal-site .personal-button{width:100%;justify-content:space-between}.render-learning-card{padding:24px}.render-card-quote{font-size:1.7rem}.public-header{min-height:0}.public-header nav a{font-size:11px;padding:11px}.personal-site .personal-values{gap:9px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){.render-learning-card *{animation:none!important;transition:none!important}}

@@ -1,0 +1,24 @@
+.dashboard{max-width:1040px;margin:0 auto;padding:clamp(20px,4vw,48px) 16px 65px;min-height:85vh;color:var(--text)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.nav a{font-size:13px;font-weight:700;text-decoration:none}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:clamp(44px,7vw,88px) 0 clamp(38px,5vw,60px);border-bottom:1px solid var(--line)}
+.eyebrow,.kicker{font-size:10px;font-weight:750;letter-spacing:.13em;color:var(--accent)}
+.hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.8rem,6vw,4.6rem);font-weight:400;letter-spacing:-.05em;line-height:1.1;margin:16px 0}
+.hero h1 span{color:var(--accent)}
+.hero p:last-child{max-width:590px;font-size:15px;line-height:1.85;color:var(--muted)}
+.heroMark{position:relative;display:grid;place-items:center;flex:0 0 108px;height:108px;background:#235ccc;color:#fff;border-radius:28px;font:75px Georgia,serif;box-shadow:0 20px 42px rgba(35,92,204,.15)}
+.heroMark span{font:19px Arial,sans-serif;position:absolute;top:15px;right:14px}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
+.primaryCard,.secondaryCard{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:335px;padding:clamp(24px,3.5vw,36px);border:1px solid var(--line);border-radius:19px;background:var(--surface);box-shadow:var(--shadow)}
+.primaryCard{border-top:4px solid #235ccc}
+.secondaryCard{border-top:4px solid var(--green)}
+.icon{display:grid;place-items:center;width:49px;height:49px;background:var(--accent-bg);color:var(--accent);border-radius:13px;font-size:27px;margin:24px 0 17px}
+.secondaryCard .icon{background:var(--green-bg);color:var(--green)}
+.tools h2{font:400 clamp(1.5rem,2.5vw,2rem)/1.2 Georgia,'Times New Roman',serif;letter-spacing:-.035em;margin:0 0 12px}
+.tools p{font-size:13px;line-height:1.8;color:var(--muted);margin:0 0 22px}
+.action{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:auto;min-height:47px;background:#235ccc;color:#fff;text-decoration:none;border-radius:10px;padding:12px 17px;font-size:12px;font-weight:700}
+.action:hover{background:#184aab;color:#fff}
+.tools .status{font-size:11px;margin:13px 0 0;color:var(--muted)}
+.comingSoon{margin-top:auto;background:var(--green-bg);color:var(--green);padding:9px 12px;border-radius:9px;font-size:11px;font-weight:700}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:35px}
+@media(max-width:700px){.tools{grid-template-columns:1fr}.heroMark{display:none}.hero{padding:40px 0}.primaryCard,.secondaryCard{min-height:285px}.hero h1{font-size:clamp(2.7rem,10vw,3.5rem)}}

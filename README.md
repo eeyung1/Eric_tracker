@@ -157,3 +157,5 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 
 - [x] Embed a full SoTeach learning studio experience within the authenticated Eric Tracker `/student/tutor` route, using the shared blue/ink design system, mobile-friendly learning steps, polished session conversation and a dashboard entry point even before private integration is configured. The studio uses the secure Next.js tutoring proxy rather than embedding Render's public UI.
 - [ ] Complete Render guardian/service credentials, durable learner linking and end-to-end acceptance before enabling real lesson requests.
+
+- [x] Redesign Vercel-hosted Eric Tracker with the SoTeach Render editorial visual language: unified navy/blue/green tokens, calm serif hero, premium learning-process card, consistent tracker/criteria surfaces, accessible horizontally scrollable mobile navigation and matching private student dashboard. Keep secure route boundaries, tracker data and mentor controls unchanged.
