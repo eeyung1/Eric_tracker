@@ -134,3 +134,12 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [x] Server-guarded `/student` dashboard and student-only sign-out. Anonymous visitors are redirected to `/student/login`; tutoring cards remain clearly marked unavailable until backend authorization is ready.
 
 - [x] Admin-only `/admin/student` tutoring summary for Emmanuel and Mr. Greg, with migration-aware empty state and server-side aggregate queries. Real data requires applying migration 002 and provisioning a learner; full authorization tests remain outstanding.
+
+### Authenticated SoTeach proxy
+
+- [x] Authenticated student-only `/api/student/tutor/[action]` proxy with server-side learner UUID lookup and fixed upstream identity mapping. Requests never accept a client-selected learner ID.
+- [x] Student-only `/student/tutor` page, connected to the existing mobile tutor component with an explicit unconfigured state.
+- [ ] Apply `database/002_tutor_learners.sql` and provision Eric's learner UUID + SoTeach learner mapping in Neon.
+- [ ] Mount the private dual-auth tutoring handler on Render and provision a guardian authorization token scoped to Eric.
+- [ ] Set Vercel server-only `SOTEACH_PRIVATE_URL`, `SOTEACH_SERVICE_TOKEN`, `SOTEACH_GUARDIAN_TOKEN`, `ERIC_TUTOR_LEARNER_ID` and student login secrets; test in preview before production.
+- [ ] Run full HTTP end-to-end tests including unauthorized, cross-learner and restart-resume cases. Current static security-gate tests are not a substitute.
