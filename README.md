@@ -120,3 +120,11 @@ The SoTeach backend also has a tested service-token middleware and an opt-in dua
 - [ ] Provision a unique student password hash and session secret in Vercel environment variables. **Do not commit or share the password**.
 
 To generate a password hash locally with Node 22, use `node --input-type=module -e "import {hashStudentPassword} from './lib/student-security.js'; console.log(hashStudentPassword(process.env.STUDENT_INITIAL_PASSWORD))"` after setting `STUDENT_INITIAL_PASSWORD` in a private shell. Copy only the resulting hash into the Vercel `ERIC_STUDENT_PASSWORD_HASH` environment variable, and use an independent random `STUDENT_SESSION_SECRET` of at least 32 characters. This PR does **not** enable a student login endpoint or grant any student access.
+
+### Student login API
+
+- [x] `POST /api/student/login` with server-only scrypt verification, shared database-backed attempt throttling, same-origin checks and a separate signed student cookie.
+- [x] `POST /api/student/logout` with origin validation and student-cookie clearing.
+- [ ] Configure `ERIC_STUDENT_PASSWORD_HASH` and `STUDENT_SESSION_SECRET` in Vercel before allowing student sign-in.
+- [ ] Exercise login/logout and lockout end-to-end against the development database; unit/source checks alone are insufficient.
+- [ ] Provide the student login UI and learner-scoped authorization for tutoring.
