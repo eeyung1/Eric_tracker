@@ -78,7 +78,8 @@ export default function TutorPanel({send}) {
    {lesson.completed?<p className={styles.complete}>Well done! The tutor has verified your progress.</p>:
    <form onSubmit={respond} className={styles.respond}>
     <label htmlFor="tutor-answer">Your explanation or answer</label>
-    <textarea id="tutor-answer" value={answer} onChange={e=>setAnswer(e.target.value)} rows={3} maxLength={8000} disabled={busy||!lesson.canAnswer}/>
+    <textarea id="tutor-answer" value={answer} onChange={e=>setAnswer(e.target.value)} rows={3} maxLength={8000} aria-describedby="tutor-answer-count" disabled={busy||!lesson.canAnswer}/>
+    <p id="tutor-answer-count" className={styles.hint}>{8000-answer.length} characters remaining. Your answer stays here until SoTeach confirms it.</p>
     <button className={styles.primary} disabled={busy||!answer.trim()||!lesson.canAnswer}>{busy?'Thinking…':'Send response'}</button>
    </form>}
    <button type="button" className={styles.secondary} disabled={busy} onClick={()=>{setLesson(null);setHistory([]);setError('');setLastFailed(null);}}>Choose another topic</button>
