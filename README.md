@@ -172,3 +172,6 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [x] Add regression coverage for payload validation, cross-learner field rejection, throttling order, safe response headers and retry UX.
 
 These changes do not activate live tutoring: guardian consent, Render/Vercel service credentials, SoTeach learner mapping and supervised end-to-end acceptance remain outstanding.
+
+- [x] Add an authenticated mentor-only **Check SoTeach connection** action at `/admin/student`. The POST probe verifies same-origin admin session, enforces a database-backed limit of five checks per 15 minutes, and makes a read-only private `session` request for Eric's mapped learner. It reports only coarse setup/authorization/availability outcomes, without returning secrets, learner identifiers or lesson content. A 404 session response can indicate authorized access with no active lesson, but does **not** prove the entire tutoring journey works.
+- [ ] After durable guardian provisioning and credential setup, run the mentor connection check, then separately complete a supervised begin/input/resume acceptance cycle. Do not label the full lesson verified based solely on the probe.
