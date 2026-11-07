@@ -21,7 +21,7 @@ export default async function StudentDashboard(){
   <section aria-label="Learning tools" style={{display:'grid',gap:16,gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,250px),1fr))',marginTop:32}}>
    <article style={{border:'1px solid #94a3b8',borderRadius:16,padding:20}}>
     <h2>Guided tutoring</h2><p>Interactive Socratic lessons will appear here once the private tutoring service is connected.</p>
-    <span aria-label="Not yet available">Coming soon</span>
+    <Link href="/student/tutor">Open guided tutoring →</Link>
    </article>
    <article style={{border:'1px solid #94a3b8',borderRadius:16,padding:20}}>
     <h2>My learning progress</h2><p>Your private sessions and course progress will be tracked after setup.</p>
