@@ -39,3 +39,13 @@ test('private tutor client validates method and payload limits',async()=>{
  await assert.rejects(requestSoTeach({...args,body:{input:'hi'},fetchImpl:()=>{throw Error('called')}}),TypeError);
  await assert.rejects(requestSoTeach({...args,action:'input',body:{input:'a'.repeat(17000)},fetchImpl:()=>{throw Error('called')}}),TypeError);
 });
+
+test('private tutor client routes through strict internal prefix',async()=>{
+ const result=await requestSoTeach({...args,env:{...env,SOTEACH_PRIVATE_URL:'https://tutor.example/internal/'},fetchImpl:async(url,opts)=>{
+  assert.equal(url.href,'https://tutor.example/internal/learners/eric-123/session');
+  assert.equal(opts.headers['X-SoTeach-Service-Token'],env.SOTEACH_SERVICE_TOKEN);
+  return new Response(JSON.stringify({state:'diagnosing'}),{headers:{'content-type':'application/json'}});
+ }});
+ assert.equal(result.state,'diagnosing');
+ await assert.rejects(requestSoTeach({...args,env:{...env,SOTEACH_PRIVATE_URL:'https://tutor.example/unsafe/'},fetchImpl:()=>{throw Error('unexpected fetch')}}),SoTeachUnavailable);
+});
