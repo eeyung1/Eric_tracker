@@ -143,3 +143,6 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [ ] Mount the private dual-auth tutoring handler on Render and provision a guardian authorization token scoped to Eric.
 - [ ] Set Vercel server-only `SOTEACH_PRIVATE_URL`, `SOTEACH_SERVICE_TOKEN`, `SOTEACH_GUARDIAN_TOKEN`, `ERIC_TUTOR_LEARNER_ID` and student login secrets; test in preview before production.
 - [ ] Run full HTTP end-to-end tests including unauthorized, cross-learner and restart-resume cases. Current static security-gate tests are not a substitute.
+
+- [x] Discoverable student and mentor entry points added to homepage, site navigation and footer. Student access remains gated by secure server configuration.
+- [x] Tutoring schema tested on an isolated Neon branch (`tutoring-migration-validation-20261107`); production migration is a separate deployment step.
