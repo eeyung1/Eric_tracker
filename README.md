@@ -152,3 +152,5 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [x] Provisioned Eric's learner record in production Neon and configured server-only `ERIC_TUTOR_LEARNER_ID` in Vercel; tutoring proxy also verifies resolved display name is Eric before forwarding requests. SoTeach external learner key and guardian authorization are still pending.
 
 - [x] Student dashboard setup readiness flags show a safe, non-secret pending state until tutoring credentials are configured; no guardian tokens or learner IDs are returned to the browser.
+
+- [x] Mocked private HTTP contract tests for SoTeach begin, input, resume, dual authentication headers, guardian denial and invalid upstream responses. [ ] Live cross-service acceptance remains pending Render configuration and guardian account provisioning.
