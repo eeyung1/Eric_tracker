@@ -22,7 +22,7 @@ test('private tutoring input and resume preserve upstream methods',async()=>{
    assert.equal(url.pathname.endsWith('/'+action),true);
    assert.equal(opts.method,method);
    assert.equal(opts.body===undefined,method==='GET');
-   return new Response('{}',{headers:{'content-type':'application/json'}});
+   return new Response(JSON.stringify({state:'diagnosing'}),{headers:{'content-type':'application/json'}});
   }});
  }
 });
