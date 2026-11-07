@@ -95,3 +95,18 @@ Routes: `/` personal homepage; `/tracker` growth tracker and public comments; `/
 The personal homepage includes a lightweight CSS learning buddy with a keyboard/touch high-five button and encouraging messages. This interaction never adds points or changes database records. Decorative stickers, orbit lines, a short wave, progress transitions, and section reveals use CSS transforms and opacity; no video, canvas loop, animation library, audio, or external imagery is required.
 
 Public navigation includes a persistent Pause motion control. System reduced-motion settings always suppress decorative animation and confetti. Decorative animation pauses when the tab is hidden, and the hero pauses when offscreen. Scroll-reveal content remains visible with JavaScript unavailable, with motion paused, and with reduced motion enabled. Controls retain visible keyboard focus and touch-friendly targets.
+
+## SoTeach-ai integration milestones (November 2026)
+
+- [x] Secure integration architecture documented in [docs/soteach-integration-contract.md](docs/soteach-integration-contract.md).
+- [x] Server-side SoTeach transport with HTTPS, bounded responses, timeout and sanitized errors (`lib/soteach-client.js`). Not yet connected to a public route.
+- [x] Versioned private learner/session schema (`database/002_tutor_learners.sql`) and parameterized repository. **Migration not yet applied to Neon**.
+- [x] Reusable mobile-first tutoring component (`components/tutor/TutorPanel.jsx`) with resume, begin and answer interactions. **Not mounted publicly** until student authentication and private API wiring are complete.
+- [ ] Authenticate Eric as a student and enforce learner ownership in every tutoring route.
+- [ ] Mount and deploy the protected SoTeach API on Render, without exposing a parallel anonymous learner surface.
+- [ ] Configure server-only Vercel/Render credentials, verify a full session in preview, and deploy safely.
+- [ ] Apply and validate the migration in the development Neon branch, then production.
+- [ ] Extend the Go tutoring engine for university-level subjects and private course materials.
+- [ ] Complete database-backed integration and browser acceptance tests.
+
+The SoTeach backend also has a tested service-token middleware and an opt-in dual-authorization private handler. Neither is proof that the hosted Render service currently exposes the private API.
