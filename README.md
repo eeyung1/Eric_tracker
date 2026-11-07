@@ -128,3 +128,5 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [ ] Configure `ERIC_STUDENT_PASSWORD_HASH` and `STUDENT_SESSION_SECRET` in Vercel before allowing student sign-in.
 - [ ] Exercise login/logout and lockout end-to-end against the development database; unit/source checks alone are insufficient.
 - [ ] Provide the student login UI and learner-scoped authorization for tutoring.
+
+- [x] Mobile student sign-in page at `/student/login` with same-origin credential submission, accessible errors and no browser password storage. Dashboard authorization and initial credentials remain pending.
