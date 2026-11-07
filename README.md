@@ -130,3 +130,5 @@ To generate a password hash locally with Node 22, use `node --input-type=module 
 - [ ] Provide the student login UI and learner-scoped authorization for tutoring.
 
 - [x] Mobile student sign-in page at `/student/login` with same-origin credential submission, accessible errors and no browser password storage. Dashboard authorization and initial credentials remain pending.
+
+- [x] Server-guarded `/student` dashboard and student-only sign-out. Anonymous visitors are redirected to `/student/login`; tutoring cards remain clearly marked unavailable until backend authorization is ready.
