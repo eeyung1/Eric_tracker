@@ -24,7 +24,12 @@ export default function TutorPanel({send}) {
   try {
    const state=tutorView(await send('session'));
    setLesson(state);
-   setHistory(state.prompt?[{role:'tutor',text:state.prompt}]:[]);
+   setHistory(previous=>{
+    if(!state.prompt)return previous;
+    if(previous.length===0)return [{role:'tutor',text:state.prompt}];
+    const last=previous[previous.length-1];
+    return last.role==='tutor'&&last.text===state.prompt?previous:[...previous,{role:'tutor',text:state.prompt}];
+   });
   } catch(e) {
    if (e?.status !== 404) {setError(tutorErrorMessage(e));setLastFailed('resume');}
   } finally {setBusy(false);}
@@ -45,7 +50,7 @@ export default function TutorPanel({send}) {
   event.preventDefault();
   const input=answer.trim();
   if (!input || busy || !lesson?.canAnswer || typeof send !== 'function') return;
-  setBusy(true);setError('');
+  setBusy(true);setError('');setLastFailed(null);
   try {
    const next=tutorView(await send('input',{input}));
    setHistory(previous=>[...previous,{role:'learner',text:input},...(next.prompt?[{role:'tutor',text:next.prompt}]:[])]);
@@ -73,10 +78,11 @@ export default function TutorPanel({send}) {
    {lesson.completed?<p className={styles.complete}>Well done! The tutor has verified your progress.</p>:
    <form onSubmit={respond} className={styles.respond}>
     <label htmlFor="tutor-answer">Your explanation or answer</label>
-    <textarea id="tutor-answer" value={answer} onChange={e=>setAnswer(e.target.value)} rows={3} maxLength={8000} disabled={busy||!lesson.canAnswer}/>
+    <textarea id="tutor-answer" value={answer} onChange={e=>setAnswer(e.target.value)} rows={3} maxLength={8000} aria-describedby="tutor-answer-count" disabled={busy||!lesson.canAnswer}/>
+    <p id="tutor-answer-count" className={styles.hint}>{8000-answer.length} characters remaining. Your answer stays here until SoTeach confirms it.</p>
     <button className={styles.primary} disabled={busy||!answer.trim()||!lesson.canAnswer}>{busy?'Thinking…':'Send response'}</button>
    </form>}
-   <button type="button" className={styles.secondary} onClick={()=>{setLesson(null);setHistory([]);setError('');}}>Choose another topic</button>
+   <button type="button" className={styles.secondary} disabled={busy} onClick={()=>{setLesson(null);setHistory([]);setError('');setLastFailed(null);}}>Choose another topic</button>
   </div>}
   {busy&&<p role="status" className={styles.hint}>SoTeach is processing your request. Please wait…</p>}
   {error&&<div role="alert" className={styles.error}><p>{error}</p>{lastFailed==='resume'&&<button type="button" className={styles.secondary} onClick={()=>void resume()} disabled={busy}>Try resuming again</button>}{lastFailed==='input'&&<p>Your answer is still here. Check the lesson status with Resume before resending to avoid a duplicate answer.</p>}{lastFailed==='begin'&&<p>Your topic is saved in the form. You can try starting again.</p>}</div>}

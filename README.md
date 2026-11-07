@@ -175,3 +175,13 @@ These changes do not activate live tutoring: guardian consent, Render/Vercel ser
 
 - [x] Add an authenticated mentor-only **Check SoTeach connection** action at `/admin/student`. The POST probe verifies same-origin admin session, enforces a database-backed limit of five checks per 15 minutes, and makes a read-only private `session` request for Eric's mapped learner. It reports only coarse setup/authorization/availability outcomes, without returning secrets, learner identifiers or lesson content. A 404 session response can indicate authorized access with no active lesson, but does **not** prove the entire tutoring journey works.
 - [ ] After durable guardian provisioning and credential setup, run the mentor connection check, then separately complete a supervised begin/input/resume acceptance cycle. Do not label the full lesson verified based solely on the probe.
+
+### SoTeach learner session safety — five-feature batch
+
+- [x] Reject malformed successful upstream lesson responses (non-object JSON, missing/invalid state), rather than displaying an unusable lesson.
+- [x] Explain tutor rate limits, guardian-plan requirements, invalid inputs and temporary outages in learner-friendly language.
+- [x] Preserve the current in-memory lesson conversation when resuming instead of replacing it with the latest prompt; avoid duplicating an unchanged final tutor prompt.
+- [x] Prevent switching to another topic while a lesson request is in flight, reducing accidental race conditions.
+- [x] Provide an accessible remaining-character counter and explicit answer-draft feedback for mobile learners; add regression tests for the batch.
+
+The transcript is in-memory only, not persisted across browser reloads; SoTeach remains the server authority for the active lesson. Live activation still requires durable guardian provisioning, consent, Render/Vercel credentials, learner mapping and supervised end-to-end testing.
