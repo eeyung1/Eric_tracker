@@ -20,3 +20,26 @@
 .error{color:#b91c1c;font-weight:600}
 @media(max-width:480px){.panel{padding:14px;border-radius:14px}.header{align-items:center}.messages{max-height:45vh}.primary{width:100%}}
 @media(prefers-reduced-motion:reduce){.panel *{scroll-behavior:auto!important;transition:none!important}}
+
+/* Embedded SoTeach studio: polished lesson UI, inherits Eric Tracker tokens. */
+.panel{max-width:none;border:0;border-top:1px solid var(--line,#e6ecf2);border-radius:0;padding:clamp(18px,3vw,28px) 0 0;box-shadow:none}
+.header{margin-bottom:25px}
+.header h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.65rem,3vw,2.15rem);font-weight:400}
+.eyebrow{color:var(--accent,#235ccc);font-weight:750;opacity:1;letter-spacing:.1em}
+.start{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.start label{color:var(--text,#192b42);font-size:.89rem;gap:9px}
+.start label:nth-child(2),.start .hint,.start .primary{grid-column:1/-1}
+.start input,.start select,.respond textarea{min-height:48px;border:1px solid var(--line,#e6ecf2);background:var(--bg,#f7f9fc);border-radius:11px;color:var(--text,#192b42);padding:13px 15px}
+.start input::placeholder,.respond textarea::placeholder{color:var(--muted,#64748b)}
+.primary{background:#235ccc;border-color:#235ccc;box-shadow:0 6px 20px rgba(35,92,204,.12)}
+.primary:hover:not(:disabled){background:#184aab}
+.secondary{border-color:var(--line,#e6ecf2);color:var(--accent,#235ccc);background:var(--surface,#fff)}
+.primary:focus-visible,.secondary:focus-visible,.start input:focus-visible,.respond textarea:focus-visible{outline:3px solid var(--accent,#235ccc);outline-offset:3px}
+.hint,.state{color:var(--muted,#64748b);opacity:1}
+.lesson{gap:20px}.state{text-transform:capitalize;font-weight:700;letter-spacing:.02em}
+.messages{max-height:52vh;gap:16px;padding:16px 4px}
+.messages p{max-width:84%;padding:16px 18px;line-height:1.75}
+.tutor{background:var(--accent-bg,#edf3ff);color:var(--text,#192b42);border-radius:16px 16px 16px 5px}
+.learner{background:var(--green-bg,#ecf8f1);color:var(--text,#192b42);border-radius:16px 16px 5px 16px}
+.complete{color:var(--green,#217960)}.error{color:var(--red,#a32d2d)}
+@media(max-width:600px){.panel{padding:20px 0 0}.start{grid-template-columns:1fr}.start label:nth-child(2),.start .hint,.start .primary{grid-column:auto}.messages p{max-width:95%}.header{align-items:flex-start}.secondary{min-height:44px}}
