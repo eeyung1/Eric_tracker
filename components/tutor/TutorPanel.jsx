@@ -17,6 +17,9 @@ export default function TutorPanel({send}) {
  const [error,setError]=useState('');
  const [history,setHistory]=useState([]);
  const [lastFailed,setLastFailed]=useState(null);
+ const topicIdeas=['Functions in Go','Solving equations','Writing a clear essay'];
+ const stages=['diagnose','explain','practice','verify','mastered'];
+ const stageIndex=lesson?stages.indexOf(lesson.state.toLowerCase()):-1;
 
  const resume=useCallback(async()=>{
   if (typeof send !== 'function') return;
@@ -66,13 +69,15 @@ export default function TutorPanel({send}) {
   {!lesson && <form className={styles.start} onSubmit={begin}>
    <label>Subject<input value={subject} onChange={e=>setSubject(e.target.value)} maxLength={120} required/></label>
    <label>Topic<input value={topic} onChange={e=>setTopic(e.target.value)} maxLength={200} placeholder="e.g. Functions in Go" required/></label>
+   <div className={styles.topicIdeas} aria-label="Suggested topics"><span>Need an idea?</span>{topicIdeas.map(idea=><button key={idea} type="button" className={styles.topicChip} onClick={()=>setTopic(idea)} aria-pressed={topic===idea}>{idea}</button>)}</div>
    <label>Learning level<select value={grade} onChange={e=>setGrade(e.target.value)}><option value="SSS3">Senior secondary (pilot)</option></select></label>
    <p className={styles.hint}>University-level tutoring will be enabled when the Go engine supports it.</p>
    <button className={styles.primary} disabled={busy||typeof send!=='function'}>{busy?'Connecting…':'Start guided lesson'}</button>
   </form>}
   {lesson && <div className={styles.lesson}>
-   <p className={styles.state}>Stage: {lesson.state.replaceAll('_',' ')}</p>
-   <div className={styles.messages} role="log" aria-live="polite">
+   <div className={styles.lessonTop}><p className={styles.state}>Current stage: <strong>{lesson.state.replaceAll('_',' ')}</strong></p><button type="button" className={styles.secondary} disabled={busy} onClick={()=>void resume()}>Check lesson status</button></div>
+   <div className={styles.stageTrack} aria-label="Lesson stage">{stages.map((stage,index)=><span key={stage} className={index===stageIndex?styles.stageCurrent:index<stageIndex?styles.stageDone:styles.stageUpcoming} aria-current={index===stageIndex?'step':undefined}>{stage==='diagnose'?'Explore':stage==='explain'?'Understand':stage==='practice'?'Practise':stage==='verify'?'Verify':'Complete'}</span>)}</div>
+   <div className={styles.messages} role="log" aria-live="polite" aria-label="Lesson conversation">
     {history.map((entry,index)=><p key={index} className={entry.role==='tutor'?styles.tutor:styles.learner}>{entry.text}</p>)}
    </div>
    {lesson.completed?<p className={styles.complete}>Well done! The tutor has verified your progress.</p>:
