@@ -50,6 +50,8 @@ async function handle(request,context,method){
    status===429?'Too many tutoring requests. Try again later.':
    status===503?'Tutoring is temporarily unavailable.':
    'Unable to complete tutoring request.';
-  return Response.json({error:message},{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+  const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
+  if(status===429 && Number.isInteger(error.retryAfter))headers['Retry-After']=String(error.retryAfter);
+  return Response.json({error:message},{status,headers});
  }
 }

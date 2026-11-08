@@ -191,3 +191,5 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Bound private SoTeach response bodies to 64 KiB **while streaming**, not merely after `response.text()`, and cancel oversized streams. Reject malformed/oversized responses with the existing sanitized 503 service-unavailable response. Includes chunked-response and Content-Length regression tests.
 
 - [x] Make mentor connection-check results fail closed: an upstream 404 now means `session_not_found` (authorization **unverified**), not `authorized_no_session`. Update UI and regression tests to prevent false-positive guardian authorization indicators. Only a successful authenticated session response may report `authorized`; full lesson acceptance remains separately unverified.
+
+- [x] Add standards-compliant `Retry-After` seconds to the authenticated student tutor's HTTP 429 response. Calculate the remaining wait from the shared Neon `request_limits.expires_at` timestamp, bounded to 1–900 seconds; preserve no-store and safe error messages. Includes regression tests. This is a response-header enhancement, not a change to the 60-per-15-minute quota.
