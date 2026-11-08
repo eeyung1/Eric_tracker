@@ -263,3 +263,14 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Modernize mentor section navigation and activity forms with accessible pill controls, mobile spacing and consistent field styling.
 - [x] Add design regression tests and preserve reduced-motion behavior.
 - [ ] Verify the rendered student and mentor dashboards on Android/iOS, including dark-mode contrast and Vercel deployment.
+
+### SoTeach learning studio — next five UX features
+
+- [x] Apply Eric Tracker's violet, amber and midnight visual identity to the private studio hero and learning path.
+- [x] Show a safe, human-readable tutoring connection status and distinguish missing learner mapping from unavailable setup.
+- [x] Provide tap-friendly topic suggestions that populate the lesson topic without silently starting a session.
+- [x] Display the tutor-reported lesson stage, a stage guide, and a clear refresh-status action (Go remains authoritative).
+- [x] Improve mobile conversation bubbles, answer composer, focus targets and long-answer readability.
+- [x] Add responsive styles using existing light/dark theme tokens.
+- [ ] Verify mobile rendering, real learner progression and the production SoTeach connection before launch.
+- [ ] Resolve guardian-scoped session/profile isolation and guardian consent provisioning before enabling live tutoring.
