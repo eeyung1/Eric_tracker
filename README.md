@@ -243,3 +243,13 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 ### Comment reporting deployment notes
 
 The moderation schema is in `database/003_comment_moderation.sql` and was applied to the Eric Tracker Neon database before merging the corresponding API. Public users may report comments but cannot see the report queue or audit log. Mentors review reports in **Admin → Comments**. Deleting a comment removes its reports through the database foreign key while preserving the separate audit record. No automated content blocking is implemented; reports require manual mentor review.
+
+### Expressive visual identity refresh
+
+- [x] Establish a unified warm-canvas, midnight-ink, electric-violet and amber palette across public pages.
+- [x] Refresh homepage hero with bolder editorial type, violet accent treatment and subtle decorative glow.
+- [x] Give the learning approach panel a distinctive midnight gradient with high-contrast text.
+- [x] Redesign quick-navigation cards with colored top accents, deeper elevation and keyboard-focus feedback.
+- [x] Update public tracker statistics, panels, navigation chips and mobile sizing for a consistent visual language.
+- [x] Preserve system/light/dark theme support and reduced-motion preferences with CSS-only visuals.
+- [ ] Conduct visual QA on small Android screens, iOS Safari, light/dark contrast and Vercel production deployment.
