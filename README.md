@@ -313,3 +313,27 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Add regression checks for navigation, mentor authorization and responsive layout.
 - [ ] Complete supervised real lesson begin/input/resume after SoTeach guardian consent and private credentials are configured.
 - [ ] Investigate the reported failed Vercel deployment using its deployment logs; GitHub CI success alone does not establish deployment health.
+
+### Material-grounded Socratic learning and automatic points
+
+**Product direction:** Eric uploads private learning materials; SoTeach teaches
+and verifies understanding from those materials; Eric Tracker awards points
+automatically for trusted, verified learning milestones. See
+[the implementation contract](docs/soteach-materials-and-automated-rewards.md).
+
+- [x] Document material ingestion, guardian/privacy boundaries, event
+  authenticity, scoring and transactional ledger requirements.
+- [x] Add a versioned, non-mutating reward policy with per-lesson limits and
+  stable idempotency keys.
+- [x] Add tests rejecting forged, unverified, wrong-learner, upload-only and
+  message-only point claims.
+- [ ] Implement secure student PDF/text upload, private storage, extraction and
+  document ownership controls.
+- [ ] Implement SoTeach Go document-grounded lesson API and source citations.
+- [ ] Implement authenticated verified-milestone event production in SoTeach.
+- [ ] Add Neon event-ledger migration, exactly-once award transaction,
+  per-lesson caps, reconciliation and mentor audit/reversal workflow.
+- [ ] Obtain mentor approval of proposed reward weights (5/2/2), provision
+  consent and private credentials, and run supervised live acceptance.
+- [ ] Investigate reported Vercel homepage redesign deployment failure via
+  actual Vercel logs. GitHub CI success is not deployment verification.
