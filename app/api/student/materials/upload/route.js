@@ -17,7 +17,15 @@ export async function POST(request){
   if(!type.startsWith('multipart/form-data;'))throw new HttpError(415,'Multipart form required');
   const size=Number(request.headers.get('content-length'));
   if(Number.isFinite(size)&&size>MAX_NOTE_BYTES+12000)throw new HttpError(413,'File too large');
-  const form=await request.formData();
+  // Stream with a hard cap: Content-Length is advisory and can be absent.
+  const reader=request.body?.getReader();if(!reader)throw new HttpError(400,'Empty upload');
+  const chunks=[];let total=0;
+  try{while(true){const {done,value}=await reader.read();if(done)break;total+=value.byteLength;
+    if(total>MAX_NOTE_BYTES+12000){await reader.cancel();throw new HttpError(413,'File too large');}chunks.push(value);}}
+  finally{reader.releaseLock();}
+  const bounded=new Uint8Array(total);let at=0;for(const chunk of chunks){bounded.set(chunk,at);at+=chunk.byteLength;}
+  const safeRequest=new Request(request.url,{method:'POST',headers:{'content-type':type},body:bounded});
+  const form=await safeRequest.formData();
   if([...form.keys()].length!==1||!form.has('file'))throw new HttpError(400,'Exactly one file is required');
   const file=form.get('file');
   if(!file||typeof file.arrayBuffer!=='function'||file.size>MAX_NOTE_BYTES)throw new HttpError(413,'File too large');
