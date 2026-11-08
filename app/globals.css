@@ -131,3 +131,23 @@ body{max-width:1200px}
  .render-card-kicker{margin:16px 0 10px}
  .personal-site .learning-about{padding-top:30px}
 }
+
+/* Tracker navigation and compact history discovery. */
+.tracker-quick-nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.tracker-quick-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--accent);font-size:13px;font-weight:700;text-decoration:none}
+.tracker-quick-nav a:hover,.tracker-quick-nav a:focus-visible{border-color:var(--accent)}
+#rewards,#activity,#encouragement{scroll-margin-top:18px}
+.activity-search{display:block;margin:14px 0 10px}
+.activity-search input{width:100%;min-height:46px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.history-load-more{display:block;width:100%;margin:16px 0 0;min-height:46px;border:1px solid var(--line);border-radius:10px;background:var(--accent-bg);color:var(--accent);font-size:13px;font-weight:700}
+@media(max-width:650px){
+ .tracker-quick-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}
+ .tracker-quick-nav a{font-size:12px;padding:9px 8px}
+ .tracker-quick-nav a:last-child{grid-column:1/-1}
+ .public-intro{padding-top:25px;padding-bottom:18px}
+ .public-stats{gap:9px}
+ .public-stat{padding:14px}
+ .activity-filters{display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin;padding-bottom:6px}
+ .activity-filters button{flex:0 0 auto;min-height:44px}
+ .public-activity{overflow-wrap:anywhere}
+}
