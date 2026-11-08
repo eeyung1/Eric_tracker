@@ -55,3 +55,41 @@
  .secondaryCard p{margin-bottom:10px}
 }
 @media(prefers-reduced-motion:reduce){.heroAction,.heroSecondary{transition:none}}
+
+
+/* Student experience / Eric Tracker visual identity v2 */
+.dashboard{position:relative;isolation:isolate}
+.dashboard::before{content:'';position:absolute;z-index:-1;pointer-events:none;top:70px;right:-70px;width:min(540px,80vw);height:400px;background:radial-gradient(ellipse,rgba(145,107,238,.15),transparent 68%)}
+.nav{padding:11px 0 19px;border-bottom:1px solid var(--line)}
+.nav>a{display:inline-flex;align-items:center;min-height:44px;font-weight:800}
+.navActions>a{border-radius:999px;padding:10px 16px;border:1px solid rgba(104,74,220,.15);font-weight:800}
+.hero{border-bottom:0;padding:clamp(35px,6vw,76px) 0 clamp(24px,4vw,46px)}
+.hero h1{font-weight:700;letter-spacing:-.06em;font-size:clamp(3.1rem,6.3vw,5.5rem);line-height:1.03}
+.hero h1 span{text-decoration:underline;text-decoration-color:#eab34f;text-decoration-thickness:4px;text-underline-offset:8px}
+.eyebrow,.kicker{letter-spacing:.15em;font-size:11px}
+.heroMark{background:linear-gradient(140deg,#39269f,#8053e8 65%,#d784d8);border-radius:32px;box-shadow:0 25px 55px rgba(68,43,163,.27);transform:rotate(-6deg)}
+.heroMark span{color:#ffe3a5}
+.heroAction,.action{background:#5738d5;color:#fff;border-radius:13px;box-shadow:0 10px 25px rgba(87,56,213,.2);font-weight:800;transition:transform .18s,background-color .18s}
+.heroAction:hover,.action:hover{background:#4328ba;color:#fff;transform:translateY(-2px)}
+.heroSecondary{border-radius:13px;font-weight:800}
+.tools{gap:18px;margin-top:20px}
+.primaryCard,.secondaryCard{overflow:hidden;min-height:300px;border-radius:24px;padding:clamp(24px,3vw,36px);box-shadow:0 16px 44px rgba(25,24,66,.07)}
+.primaryCard{border:1px solid rgba(112,86,215,.17);background:linear-gradient(160deg,var(--surface) 40%,var(--accent-bg) 140%)}
+.primaryCard::before,.secondaryCard::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#5c40dc,#d48be6)}
+.secondaryCard{border:1px solid var(--line);background:var(--surface)}
+.secondaryCard::before{background:linear-gradient(90deg,#e3a33d,#f4cf78)}
+.icon{width:55px;height:55px;border-radius:18px;background:var(--accent-bg);color:var(--accent);font-size:29px}
+.secondaryCard .icon{background:var(--soft-gold);color:var(--gold-text)}
+.tools h2{font-weight:700;font-size:clamp(1.55rem,2.5vw,2.1rem)}
+.tools p{font-size:14px;line-height:1.75}
+.comingSoon{background:var(--soft-gold);color:var(--gold-text);border-radius:999px;padding:10px 16px}
+@media(max-width:700px){
+ .dashboard::before{right:0;top:50px;width:100%;height:260px}
+ .hero{padding:28px 0 22px}
+ .hero h1{font-size:clamp(2.55rem,10.5vw,3.55rem);letter-spacing:-.055em}
+ .primaryCard,.secondaryCard{min-height:0;border-radius:19px}
+ .heroAction,.heroSecondary{width:100%;min-height:52px}
+ .action{min-height:52px}
+ .navActions>a{padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){.heroAction,.action{transition:none}.heroAction:hover,.action:hover{transform:none}}

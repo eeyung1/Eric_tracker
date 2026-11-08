@@ -253,3 +253,13 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Update public tracker statistics, panels, navigation chips and mobile sizing for a consistent visual language.
 - [x] Preserve system/light/dark theme support and reduced-motion preferences with CSS-only visuals.
 - [ ] Conduct visual QA on small Android screens, iOS Safari, light/dark contrast and Vercel production deployment.
+
+### Student and mentor dashboard visual refinement — five features
+
+- [x] Give the authenticated student welcome hero expressive typography, violet/amber accent and a distinctive brand emblem.
+- [x] Restyle the student learning-studio and upcoming-progress cards with premium surfaces and differentiated accent strips.
+- [x] Refresh the mentor sign-in experience with stronger brand hierarchy, an elevated sign-in card and consistent controls.
+- [x] Upgrade mentor overview metrics and welcome header with a vivid, high-contrast primary balance card.
+- [x] Modernize mentor section navigation and activity forms with accessible pill controls, mobile spacing and consistent field styling.
+- [x] Add design regression tests and preserve reduced-motion behavior.
+- [ ] Verify the rendered student and mentor dashboards on Android/iOS, including dark-mode contrast and Vercel deployment.
