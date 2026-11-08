@@ -232,5 +232,14 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Require confirmation before irreversible removal and refresh the admin comment list afterward.
 - [x] Validate comment IDs, return 404 for missing comments, and preserve existing same-origin and admin session checks.
 - [x] Provide touch-friendly removal buttons and regression checks for authorization order.
-- [ ] Add public reporting, audit logs and a review/appeal workflow; review privacy and abuse controls before broader public promotion.
+- [x] Add rate-limited public comment reporting with fixed reason choices and no reporter personal-data collection.
+- [x] Add a mentor-only pending-report queue with dismiss or remove actions.
+- [x] Record removal and report dismissal actions in a private moderation audit table.
+- [x] Restrict report and audit data to authenticated mentor state responses.
+- [x] Apply database/003_comment_moderation.sql to the Eric Tracker Neon database and add regression/integration checks.
+- [ ] Add a formal appeal workflow, reporting abuse defenses, and moderation retention policy before broader public promotion.
 - [ ] Validate touch usability and Vercel production deployment on real devices.
+
+### Comment reporting deployment notes
+
+The moderation schema is in `database/003_comment_moderation.sql` and was applied to the Eric Tracker Neon database before merging the corresponding API. Public users may report comments but cannot see the report queue or audit log. Mentors review reports in **Admin → Comments**. Deleting a comment removes its reports through the database foreign key while preserving the separate audit record. No automated content blocking is implemented; reports require manual mentor review.

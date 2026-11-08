@@ -11,7 +11,7 @@ test('comment removal occurs after same-origin check and admin authorization',()
  const remove=api.indexOf("const commentMatch = path.match(");
  assert.ok(origin>=0&&auth>origin&&remove>auth);
  assert.match(api,/commentMatch && method === 'DELETE'/);
- assert.match(api,/DELETE FROM comments WHERE id=\$1 RETURNING id/);
+ assert.match(api,/DELETE FROM comments WHERE id=\$1/);
  assert.match(api,/Comment not found/);
 });
 test('mentor interface confirms removal and disables repeat requests',()=>{

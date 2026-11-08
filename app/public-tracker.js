@@ -10,8 +10,15 @@ async function request(path, body, signal) {
  if(!response.ok) throw new Error(data.error || 'Please try again in a moment.');
  return data;
 }
-export function Comment({comment}) {
- return <article className="public-comment"><div className="public-comment-head"><strong>{comment.author_name}</strong><time dateTime={comment.created_at}>{dateLabel(comment.created_at)}</time></div><p>{comment.body}</p></article>;
+export function Comment({comment,canReport=true}) {
+ const [reason,setReason]=useState(''),[busy,setBusy]=useState(false),[status,setStatus]=useState('');
+ async function report(event){
+  event.preventDefault();if(busy||!reason)return;setBusy(true);setStatus('');
+  try{await request('comment-reports',{commentId:comment.id,reason});setStatus('Report sent to the mentors for review.');setReason('');}
+  catch(error){setStatus(error.message);}
+  finally{setBusy(false);}
+ }
+ return <article className="public-comment"><div className="public-comment-head"><strong>{comment.author_name}</strong><time dateTime={comment.created_at}>{dateLabel(comment.created_at)}</time></div><p>{comment.body}</p>{canReport&&<details className="comment-report"><summary>Report comment</summary><form onSubmit={report}><label>Reason<select value={reason} onChange={event=>setReason(event.target.value)} required><option value="">Choose a reason</option><option value="inappropriate">Inappropriate language</option><option value="personal_information">Private information</option><option value="spam">Spam</option><option value="other">Other concern</option></select></label><button type="submit" className="small secondary" disabled={busy||!reason}>{busy?'Sending…':'Send report'}</button></form>{status&&<p role="status">{status}</p>}</details>}</article>;
 }
 export function CommentForm({entryId, onAdded}) {
  const [busy,setBusy]=useState(false),[error,setError]=useState(''),[success,setSuccess]=useState(''),[commentText,setCommentText]=useState('');

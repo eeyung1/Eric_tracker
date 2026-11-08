@@ -31,6 +31,17 @@ try {
  const updated=await call('categories/'+category.body.id,'PATCH',{points:99},cookie);check(updated.body.points===99,'update criterion');
  check((await call('comments','POST',{authorName:'Visitor',body:'Public encouragement'})).status===201,'general public comment');
  check((await call('comments','POST',{authorName:'Visitor',body:'Well done',entryId:entry.body.id})).status===201,'entry public comment');
+ const flagged=await call('comments','POST',{authorName:'Integration visitor',body:'Integration report test '+randomUUID()});check(flagged.status===201,'create reportable comment');
+ check((await call('comment-reports','POST',{commentId:flagged.body.id,reason:'spam'})).status===201,'visitor can report a comment');
+ check((await call('comment-reports','POST',{commentId:flagged.body.id,reason:'invalid'})).status===400,'invalid report reason rejected');
+ check((await call('comments/'+flagged.body.id,'DELETE')).status===401,'visitor cannot remove a comment');
+ const queue=await call('state','GET',undefined,cookie);check(queue.body.reports.some(x=>x.comment_id===flagged.body.id),'mentor sees pending report');
+ const reportId=queue.body.reports.find(x=>x.comment_id===flagged.body.id).id;
+ check((await call('moderation','POST',{reportId})).status===401,'visitor cannot dismiss report');
+ check((await call('moderation','POST',{reportId},cookie)).status===200,'mentor can dismiss report');
+ check((await call('comments/'+flagged.body.id,'DELETE',undefined,cookie)).status===200,'mentor can remove reported comment');
+ const audit=await call('state','GET',undefined,cookie);check(audit.body.moderationAudit.some(x=>x.comment_id===flagged.body.id&&x.action==='removed'),'mentor sees removal audit');
+ const publicState=await call('state');check(!('moderationAudit' in publicState.body)&&!('reports' in publicState.body),'moderation data stays private');
  check((await call('comments','POST',{authorName:'Visitor',body:' '})).status===400,'blank comment rejected');
  check((await call('comments','POST',{authorName:'Visitor',body:'x'.repeat(501)})).status===400,'long comment rejected');
  const before=await call('state');const baseline=before.body.entries.reduce((s,e)=>s+e.points,0)-before.body.redemptions.reduce((s,e)=>s+e.points,0);
