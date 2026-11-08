@@ -304,3 +304,12 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Add regression checks for student login, authorization boundary and readiness language.
 - [ ] Conduct real-device sign-in, sign-out, expired-session and keyboard/screen-reader acceptance tests.
 - [ ] Validate guardian/learner mapping and a real SoTeach lesson response before claiming live tutoring works.
+
+### Mentor student-monitoring discovery
+
+- [x] Expose the existing protected `/admin/student` tutoring readiness and progress screen from the mentor dashboard.
+- [x] Add a prominent student/SoTeach quick action and a mobile-friendly monitoring card without changing admin authentication.
+- [x] Preserve the existing secure, rate-limited private connection check and its explicit unverified lesson state.
+- [x] Add regression checks for navigation, mentor authorization and responsive layout.
+- [ ] Complete supervised real lesson begin/input/resume after SoTeach guardian consent and private credentials are configured.
+- [ ] Investigate the reported failed Vercel deployment using its deployment logs; GitHub CI success alone does not establish deployment health.
