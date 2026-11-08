@@ -211,3 +211,12 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Provide direct homepage shortcuts to growth tracking, point criteria and encouragement.
 - [x] Reduce mobile hero/card spacing and make quick-link destinations large touch targets.
 - [ ] Validate on physical phones and verify Vercel production deployment; continue live learner/guardian integration separately.
+
+### Growth tracker mobile navigation and activity discovery
+
+- [x] Add direct mobile-friendly jump links to reward progress, activity history and encouragement.
+- [x] Add a client-side search across activity titles, notes and recorded/confirmed names.
+- [x] Initially render eight activities with a Show more control to reduce long mobile scrolling.
+- [x] Reset history pagination when search or activity type changes.
+- [x] Improve filtered empty states and mobile filter tap targets without changing backend data or authorization.
+- [ ] Validate tracker UX with real mobile users and review public comment moderation/privacy separately.
