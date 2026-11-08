@@ -104,3 +104,30 @@ body{max-width:1200px}
 @media(max-width:760px){.personal-site .personal-hero{grid-template-columns:1fr;padding:42px 0 46px;gap:32px}.personal-site h1{font-size:clamp(3rem,10vw,4.5rem)}.render-learning-card{max-width:600px}.public-header nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin;padding-bottom:8px}.public-header nav a{flex:0 0 auto;white-space:nowrap}.public-header nav a[href="/student/login"]{background:var(--accent-bg)}}
 @media(max-width:480px){.personal-site .personal-hero{padding:34px 0 38px}.personal-site h1{font-size:clamp(2.7rem,12vw,3.7rem)}.personal-hero-actions{display:grid;grid-template-columns:1fr}.personal-site .personal-button{width:100%;justify-content:space-between}.render-learning-card{padding:24px}.render-card-quote{font-size:1.7rem}.public-header{min-height:0}.public-header nav a{font-size:11px;padding:11px}.personal-site .personal-values{gap:9px;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.render-learning-card *{animation:none!important;transition:none!important}}
+
+/* Public mobile navigation and task-first homepage. */
+.mobile-nav-toggle{display:none}
+.home-quick-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 30px}
+.home-quick-links a{display:flex;flex-direction:column;gap:8px;min-height:95px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-decoration:none;color:var(--text);box-shadow:var(--shadow)}
+.home-quick-links strong{font-size:14px}
+.home-quick-links span{font-size:12px;color:var(--accent)}
+.home-quick-links a:hover,.home-quick-links a:focus-visible{border-color:var(--accent)}
+@media(max-width:760px){
+ .personal-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+ .mobile-nav-toggle{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:auto;min-height:44px;margin:0;padding:9px 14px;border-radius:10px;background:var(--accent-bg);color:var(--accent);border:1px solid var(--line);font-size:13px}
+ .personal-header #public-main-nav{display:none;grid-column:1/-1;order:3;width:100%;overflow:visible;flex-direction:column;align-items:stretch;gap:3px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:13px}
+ .personal-header #public-main-nav.nav-open{display:flex}
+ .personal-header #public-main-nav a{display:flex;align-items:center;min-height:44px;width:100%;padding:12px 14px;font-size:13px}
+ .personal-header .site-preferences{grid-column:1/-1;order:4;display:flex;justify-content:flex-end;width:100%;margin:0}
+ .home-quick-links{grid-template-columns:1fr;gap:9px;margin-bottom:20px}
+ .home-quick-links a{min-height:68px;padding:14px 16px;gap:5px}
+ .personal-site .personal-hero{padding:28px 0 25px;gap:18px}
+ .personal-site .personal-hero-copy>p{line-height:1.6}
+ .personal-hero-actions{margin-top:18px}
+ .personal-site .hero-footnote{margin-top:18px}
+ .render-learning-card{padding:20px}
+ .render-card-quote{margin:18px 0}
+ .render-card-steps{gap:10px;margin-bottom:18px}
+ .render-card-kicker{margin:16px 0 10px}
+ .personal-site .learning-about{padding-top:30px}
+}
