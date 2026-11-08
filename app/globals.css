@@ -151,3 +151,19 @@ body{max-width:1200px}
  .activity-filters button{flex:0 0 auto;min-height:44px}
  .public-activity{overflow-wrap:anywhere}
 }
+
+/* Encouragement board: usable composition and readable discussion on phones. */
+.comment-more{display:block;width:100%;min-height:46px;margin:14px 0 0;border:1px solid var(--line);border-radius:10px;background:var(--accent-bg);color:var(--accent);font-weight:700}
+.public-comment{overflow-wrap:anywhere}
+.public-comment-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 12px}
+.public-comment-form textarea{min-height:112px;line-height:1.5}
+.public-comment-form button{min-height:46px}
+@media(max-width:700px){
+ .public-discussion{padding:18px}
+ .discussion-columns{display:flex;flex-direction:column;gap:18px}
+ .discussion-compose{order:-1;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+ .discussion-feed{min-width:0}
+ .public-comment-form .public-form-bottom{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+ .public-comment-form .public-form-bottom button{width:100%;margin:0}
+ .public-comment-form .public-form-bottom span{font-size:12px}
+}
