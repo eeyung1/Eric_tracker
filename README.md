@@ -381,3 +381,16 @@ are not yet forwarded to SoTeach and saving materials never earns points.
 - [ ] Implement verified, exactly-once automatic 5/2/2 point credits.
 - [ ] Verify the latest production deployment is READY and test student upload
   and selection against live database.
+
+### Private material library management
+
+- [x] Search Eric's saved materials by title on the student page.
+- [x] Rename a material using authenticated, same-origin, learner-owned PATCH.
+- [x] Export saved text as a private, non-cacheable UTF-8 TXT download.
+- [x] Preserve selected lesson-preview title when a material is renamed.
+- [x] Add tests guarding owner-scoped updates and downloads.
+- [ ] PDF/DOCX ingestion and real SoTeach document-grounded lessons still require
+  sandboxed extraction and a verified upstream tutoring contract.
+- [ ] Automatic 5/2/2 credits remain blocked on authoritative SoTeach learning
+  events; saving, renaming, previewing and exporting earn no points.
+- [ ] Verify these changes on production after Vercel deployment quota resets.
