@@ -202,3 +202,12 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Make learning actions full-width, touch-friendly targets on small screens.
 - [x] Visually de-emphasize the upcoming progress card while preserving its roadmap status.
 - [ ] Audit public homepage and tracker information density with real mobile-device usability feedback; keep security, accessibility and private student route protections intact.
+
+### Public mobile navigation and homepage UX
+
+- [x] Replace overflowing mobile header links with an accessible, expandable navigation menu.
+- [x] Close the mobile menu after a navigation link is activated.
+- [x] Shorten homepage introduction and remove the third competing hero call-to-action.
+- [x] Provide direct homepage shortcuts to growth tracking, point criteria and encouragement.
+- [x] Reduce mobile hero/card spacing and make quick-link destinations large touch targets.
+- [ ] Validate on physical phones and verify Vercel production deployment; continue live learner/guardian integration separately.
