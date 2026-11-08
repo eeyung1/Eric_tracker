@@ -5,7 +5,7 @@ import {requestSoTeach,SoTeachUnavailable} from '../lib/soteach-client.js';
 import {tutorErrorMessage} from '../lib/tutor-view.js';
 const read=p=>readFileSync(new URL(p,import.meta.url),'utf8');
 const env={SOTEACH_PRIVATE_URL:'https://example.com/internal/',SOTEACH_SERVICE_TOKEN:'x'.repeat(32)};
-function fetchJSON(body){return async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},text:async()=>JSON.stringify(body)});}
+function fetchJSON(body){return async()=>({ok:true,status:200,headers:{get:(name)=>name==='content-type'?'application/json':null},text:async()=>JSON.stringify(body)});}
 test('private client rejects malformed successful lesson responses',async()=>{
  for(const body of [null,[],{}, {state:7},{state:''},{state:'x'.repeat(81)}]){
   await assert.rejects(requestSoTeach({learner:'Eric',action:'session',guardianToken:'guardian',env,fetchImpl:fetchJSON(body)}),SoTeachUnavailable);
