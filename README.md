@@ -337,3 +337,32 @@ automatically for trusted, verified learning milestones. See
   consent and private credentials, and run supervised live acceptance.
 - [ ] Investigate reported Vercel homepage redesign deployment failure via
   actual Vercel logs. GitHub CI success is not deployment verification.
+
+### Private learning materials — five-feature delivery batch
+
+The owner approved the proposed 5/2/2 verified SoTeach reward policy. No
+automatic awards are live yet.
+
+- [ ] Investigate and repair the failed homepage Vercel deployment. **Blocked
+  pending connected Vercel deployment/build logs**; GitHub CI is not Vercel.
+- [x] Add versioned, private learner-owned material schema
+  (`database/004_learning_materials.sql`) with duplicate-content protection.
+- [x] Implement authenticated, origin-protected, bounded text-note ingestion
+  (up to 40,000 characters) with server-derived Eric learner identity.
+- [x] Implement private listing, read and permanent deletion with
+  learner-scoped SQL, no-store responses and mobile-friendly material library.
+- [x] Add material validation, session/ownership and schema regression tests;
+  link the library from the learning studio.
+- [ ] Apply migration 004 to isolated Neon development branch, test the
+  database-backed routes, then apply to production after verification.
+- [ ] Add PDF upload, private object storage, safe PDF text extraction and
+  page citations. **Current UI supports pasted text notes, not PDF files.**
+- [ ] Add a source-grounded SoTeach Go tutoring contract, guardian authorization,
+  verified milestone delivery and transactional automated points.
+- [ ] Test real Android/iOS screens and deployment.
+
+The student library is available at `/student/materials` after the
+database migration is applied. Only the server uses the configured
+`ERIC_TUTOR_LEARNER_ID`; client-supplied learner identities are ignored.
+Notes are stored as private database text, not public URLs. Material contents
+are not yet forwarded to SoTeach and saving materials never earns points.
