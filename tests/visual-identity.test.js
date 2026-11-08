@@ -13,6 +13,9 @@ test('visual identity includes light and dark tokens and contrast-minded hero',(
 test('visual identity retains reduced-motion and keyboard focus feedback',()=>{
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
  assert.match(css,/\.home-quick-links a:focus-visible/);
- assert.match(home,/className="personal-hero"/);
- assert.match(home,/className="home-quick-links"/);
+ assert.match(home,/className=\{styles\.hero\}/);
+ assert.match(home,/className=\{styles\.cards\}/);
+ const homeCss=readFileSync(new URL("../app/home.module.css",import.meta.url),"utf8");
+ assert.match(homeCss,/@media\(prefers-reduced-motion:reduce\)/);
+ assert.match(homeCss,/:focus-visible/);
 });
