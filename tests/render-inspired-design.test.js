@@ -4,7 +4,9 @@ import {readFileSync} from 'node:fs';
 const read=p=>readFileSync(new URL(p,import.meta.url),'utf8');
 test('Render-inspired homepage keeps student and tracker paths discoverable',()=>{
  const home=read('../app/page.js');
- assert.match(home,/render-learning-card/);
+ assert.match(home,/home\.module\.css/);
+ assert.match(home,/className=\{styles\.art\}/);
+ assert.match(home,/pathways\.map/);
  assert.match(home,/href="\/student\/login"/);
  assert.match(home,/href="\/tracker"/);
  assert.doesNotMatch(home,/LearningBuddy/);
