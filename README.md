@@ -274,3 +274,12 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Add responsive styles using existing light/dark theme tokens.
 - [ ] Verify mobile rendering, real learner progression and the production SoTeach connection before launch.
 - [ ] Resolve guardian-scoped session/profile isolation and guardian consent provisioning before enabling live tutoring.
+
+### Homepage editorial design reset (November 2026)
+
+- [x] Replace the text-heavy homepage with a distinctive illustrated hero and a single clear primary action.
+- [x] Reduce homepage navigation decisions to three large, actionable pathways: tracker, criteria and encouragement.
+- [x] Give the learning studio a prominent secondary call to action.
+- [x] Build a cohesive typography, spacing, card and colour system in a scoped homepage stylesheet instead of extending global CSS overrides.
+- [x] Adapt hero, illustration, cards and actions for narrow mobile screens; preserve focus visibility and reduced-motion behavior.
+- [ ] Conduct real-phone visual QA, colour contrast review and user acceptance before calling the redesign finished.
