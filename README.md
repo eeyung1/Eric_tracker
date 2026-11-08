@@ -187,3 +187,5 @@ These changes do not activate live tutoring: guardian consent, Render/Vercel ser
 The transcript is in-memory only, not persisted across browser reloads; SoTeach remains the server authority for the active lesson. Live activation still requires durable guardian provisioning, consent, Render/Vercel credentials, learner mapping and supervised end-to-end testing.
 
 - [x] Gate the student dashboard's SoTeach readiness indicator and studio rendering on both server-side transport configuration and a validated Eric-to-SoTeach learner mapping. Missing mappings or Neon errors fail closed with a mentor setup message rather than a broken lesson form; no learner identifiers, credentials or database errors are sent to the student. This preflight does not claim that guardian authorization or live lesson flow has been verified.
+
+- [x] Bound private SoTeach response bodies to 64 KiB **while streaming**, not merely after `response.text()`, and cancel oversized streams. Reject malformed/oversized responses with the existing sanitized 503 service-unavailable response. Includes chunked-response and Content-Length regression tests.
