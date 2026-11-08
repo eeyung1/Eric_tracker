@@ -18,7 +18,9 @@ test('read-only check never starts a tutoring session or exposes learner identif
  assert.doesNotMatch(route,/return Response\.json\(\{.*learnerId/);
  assert.match(route,/Cache-Control':'no-store/);
  assert.match(route,/authorization_failed/);
- assert.match(route,/authorized_no_session/);
+ assert.match(route,/session_not_found/);
+ assert.doesNotMatch(route,/authorized_no_session/);
+ assert.match(route,/Authorization cannot be established/);
 });
 test('mentor dashboard has an accessible, explicit non-final connection check',()=>{
  const page=read('../app/admin/student/page.js');
@@ -27,4 +29,5 @@ test('mentor dashboard has an accessible, explicit non-final connection check',(
  assert.match(component,/role="status"/);
  assert.match(component,/method:'POST'/);
  assert.match(component,/This is not a complete lesson test/);
+ assert.match(component,/does not confirm guardian authorization/);
 });
