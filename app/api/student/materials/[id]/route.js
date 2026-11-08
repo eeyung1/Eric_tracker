@@ -19,7 +19,7 @@ async function handle(request,context,action){
    const input=await jsonBody(request);
    if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length!==1||typeof input.title!=='string')throw new HttpError(400,'Invalid title');
    const title=input.title.trim();
-   if(!title||title.length>120||/[^\x20-\x7e]/.test(title))throw new HttpError(400,'Invalid title');
+   if(!title||title.length>120||[...title].some(char=>char.codePointAt(0)<32||char.codePointAt(0)===127))throw new HttpError(400,'Invalid title');
    params=[id,learnerId,title];
    sql='UPDATE student_learning_materials SET title=$3 WHERE id=$1 AND learner_id=$2 RETURNING id,title,created_at';
   }else sql='SELECT id,title,content,created_at FROM student_learning_materials WHERE id=$1 AND learner_id=$2';
