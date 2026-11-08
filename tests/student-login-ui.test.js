@@ -6,7 +6,7 @@ const page=readFileSync(new URL('../app/student/login/page.js',import.meta.url),
 test('student sign-in sends credentials only to same-origin student endpoint',()=>{
  assert.match(form,/fetch\('\/api\/student\/login'/);
  assert.match(form,/credentials:'same-origin'/);
- assert.match(form,/type="password"/);
+ assert.match(form,/type=\{visible\?"text":"password"\}/);
  assert.match(form,/autoComplete="current-password"/);
  assert.match(form,/role="alert"/);
  assert.doesNotMatch(form,/localStorage|sessionStorage/);
