@@ -294,3 +294,13 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Add regression checks for auth, real navigation targets, moderation and responsive layouts.
 - [ ] Verify visual polish on real Android/iPhone devices and keyboard/screen-reader flows.
 - [ ] Validate Vercel deployment and conduct a user acceptance review before declaring the full redesign complete.
+
+### Student login-to-lesson journey — mobile usability pass
+
+- [x] Rebuild student sign-in with modern dashboard visual language and a mobile-first layout.
+- [x] Add accessible password reveal, input validation messaging and clearer loading/submit feedback while preserving authentication API semantics.
+- [x] Align the private SoTeach studio with the modern dashboard's responsive navigation, typography and card system.
+- [x] Clearly distinguish successful student login, configured tutoring transport and a successfully responding SoTeach session.
+- [x] Add regression checks for student login, authorization boundary and readiness language.
+- [ ] Conduct real-device sign-in, sign-out, expired-session and keyboard/screen-reader acceptance tests.
+- [ ] Validate guardian/learner mapping and a real SoTeach lesson response before claiming live tutoring works.
