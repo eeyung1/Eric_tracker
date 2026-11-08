@@ -193,3 +193,12 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Make mentor connection-check results fail closed: an upstream 404 now means `session_not_found` (authorization **unverified**), not `authorized_no_session`. Update UI and regression tests to prevent false-positive guardian authorization indicators. Only a successful authenticated session response may report `authorized`; full lesson acceptance remains separately unverified.
 
 - [x] Add standards-compliant `Retry-After` seconds to the authenticated student tutor's HTTP 429 response. Calculate the remaining wait from the shared Neon `request_limits.expires_at` timestamp, bounded to 1–900 seconds; preserve no-store and safe error messages. Includes regression tests. This is a response-header enhancement, not a change to the 60-per-15-minute quota.
+
+### Student mobile UI/UX optimization
+
+- [x] Add a prominent learning-studio action immediately below the student welcome message.
+- [x] Add a direct learning-studio shortcut in authenticated student navigation.
+- [x] Reduce mobile dashboard hero and card vertical space so primary actions appear sooner.
+- [x] Make learning actions full-width, touch-friendly targets on small screens.
+- [x] Visually de-emphasize the upcoming progress card while preserving its roadmap status.
+- [ ] Audit public homepage and tracker information density with real mobile-device usability feedback; keep security, accessibility and private student route protections intact.
