@@ -353,8 +353,7 @@ automatic awards are live yet.
   learner-scoped SQL, no-store responses and mobile-friendly material library.
 - [x] Add material validation, session/ownership and schema regression tests;
   link the library from the learning studio.
-- [ ] Apply migration 004 to isolated Neon development branch, test the
-  database-backed routes, then apply to production after verification.
+- [x] Apply migration 004 to Neon development and production branches; development first required applying missing migration 002. Both schema transactions completed successfully.\n- [ ] Verify live database-backed upload/list/read/delete against an authenticated deployment; schema application and unit tests alone do not prove HTTP acceptance.
 - [ ] Add PDF upload, private object storage, safe PDF text extraction and
   page citations. **Current UI supports pasted text notes, not PDF files.**
 - [ ] Add a source-grounded SoTeach Go tutoring contract, guardian authorization,
