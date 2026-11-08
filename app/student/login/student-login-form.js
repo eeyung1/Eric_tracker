@@ -1,11 +1,13 @@
 'use client';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
+import styles from './student-login.module.css';
 export default function StudentLoginForm(){
  const router=useRouter();
  const [password,setPassword]=useState('');
  const [pending,setPending]=useState(false);
  const [message,setMessage]=useState('');
+ const [visible,setVisible]=useState(false);
  async function submit(event){
   event.preventDefault();
   if(pending||!password)return;
@@ -22,16 +24,21 @@ export default function StudentLoginForm(){
   }catch{setMessage('Connection unavailable. Please try again.');}
   finally{setPending(false);}
  }
- return <form onSubmit={submit} style={{display:'grid',gap:16,maxWidth:440,margin:'24px auto',padding:24,border:'1px solid #94a3b8',borderRadius:18}}>
-  <h1 style={{margin:0,fontSize:'clamp(1.5rem,5vw,2rem)'}}>Eric's learning space</h1>
-  <p style={{margin:0}}>Sign in to access your private learning dashboard.</p>
-  <label htmlFor="student-password" style={{fontWeight:600}}>Password</label>
-  <input id="student-password" type="password" autoComplete="current-password" required minLength={12} maxLength={256}
+ return <form onSubmit={submit} className={styles.form} aria-labelledby="student-login-title">
+  <div className={styles.formIcon} aria-hidden="true">↗</div>
+  <p className={styles.eyebrow}>PRIVATE STUDENT ACCESS</p>
+  <h1 id="student-login-title">Welcome back, Eric.</h1>
+  <p className={styles.description}>Sign in to open your dashboard and continue your learning journey.</p>
+  <label htmlFor="student-password" className={styles.label}>Your password</label>
+  <div className={styles.passwordField}>
+  <input id="student-password" type={visible?"text":"password"} autoComplete="current-password" required minLength={12} maxLength={256}
    value={password} onChange={e=>setPassword(e.target.value)}
-   style={{width:'100%',padding:12,minHeight:48,borderRadius:10,border:'1px solid #94a3b8',fontSize:16}}/>
-  <button type="submit" disabled={pending||!password} style={{minHeight:48,borderRadius:10,background:'#1948a3',color:'#fff',fontWeight:700,border:0}}>
-   {pending?'Signing in…':'Sign in'}
+   aria-invalid={!!message} aria-describedby={message?"student-login-error":undefined}/>
+   <button className={styles.reveal} type="button" aria-label={visible?"Hide password":"Show password"} aria-pressed={visible} onClick={()=>setVisible(v=>!v)}>{visible?"Hide":"Show"}</button></div>
+  <button type="submit" className={styles.submit} disabled={pending||!password}>
+   {pending?'Signing in…':'Open my dashboard'} <span aria-hidden="true">→</span>
   </button>
-  {message&&<p role="alert" style={{color:'#b91c1c'}}>{message}</p>}
+  {message&&<p id="student-login-error" role="alert" className={styles.error}>{message}</p>}
+  <p className={styles.helper}>Student access only · Your learning activity stays private.</p>
  </form>;
 }
