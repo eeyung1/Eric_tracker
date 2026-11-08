@@ -22,3 +22,36 @@
 .comingSoon{margin-top:auto;background:var(--green-bg);color:var(--green);padding:9px 12px;border-radius:9px;font-size:11px;font-weight:700}
 .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:35px}
 @media(max-width:700px){.tools{grid-template-columns:1fr}.heroMark{display:none}.hero{padding:40px 0}.primaryCard,.secondaryCard{min-height:285px}.hero h1{font-size:clamp(2.7rem,10vw,3.5rem)}}
+
+/* Mobile-first learning actions: preserve the established desktop visual system. */
+.navActions{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}
+.navActions>a{display:inline-flex;align-items:center;min-height:44px;padding:10px 12px;border-radius:10px;background:var(--accent-bg);color:var(--accent);font-size:12px}
+.heroActions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px}
+.heroAction,.heroSecondary{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:48px;padding:12px 18px;border-radius:11px;text-decoration:none;font-size:13px;font-weight:750}
+.heroAction{background:#235ccc;color:#fff}
+.heroAction:hover{background:#184aab;color:#fff}
+.heroSecondary{border:1px solid var(--line);background:var(--surface);color:var(--text)}
+.tools{scroll-margin-top:18px}
+@media(max-width:700px){
+ .dashboard{padding:16px 16px calc(80px + env(safe-area-inset-bottom,0px))}
+ .nav{gap:8px}
+ .navActions{gap:6px}
+ .navActions>a{padding:8px;font-size:11px}
+ .hero{padding:28px 0 24px}
+ .hero h1{font-size:clamp(2.25rem,9vw,3.15rem);margin:10px 0}
+ .hero p:last-child{font-size:14px;line-height:1.6}
+ .heroActions{margin-top:18px;gap:8px}
+ .heroAction{flex:1 1 100%}
+ .heroSecondary{flex:1 1 100%}
+ .tools{margin-top:20px;gap:12px}
+ .primaryCard{min-height:0;padding:22px;border-radius:15px}
+ .secondaryCard{min-height:0;padding:18px;border-radius:15px}
+ .icon{margin:14px 0 12px;width:40px;height:40px}
+ .tools h2{font-size:1.45rem}
+ .tools p{margin-bottom:15px}
+ .action{width:100%;min-height:48px}
+ .secondaryCard .icon{display:none}
+ .secondaryCard h2{font-size:1.2rem}
+ .secondaryCard p{margin-bottom:10px}
+}
+@media(prefers-reduced-motion:reduce){.heroAction,.heroSecondary{transition:none}}
