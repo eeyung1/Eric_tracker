@@ -17,7 +17,7 @@
     "server-only": "0.0.1"
   },
   "engines": {
-    "node": ">=22"
+    "node": "24.x"
   },
   "type": "module"
 }
