@@ -54,3 +54,27 @@
  .connectionState{align-items:flex-start}
 }
 @media(max-width:380px){.heroAside ol{grid-template-columns:1fr}}
+
+
+/* Modern app studio, aligned with student workspace */
+.appLabel{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.15em;font-weight:900;color:var(--muted);margin:0 0 15px}
+.appDot{width:9px;height:9px;border-radius:50%;background:#7454df}
+.studio{max-width:1280px;padding:24px clamp(18px,4vw,54px) 70px}
+.breadcrumb{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:9px 16px;min-height:53px;margin-bottom:22px}
+.hero{grid-template-columns:minmax(0,1.4fr) minmax(240px,.7fr);padding:0;gap:16px;align-items:stretch;margin-bottom:18px}
+.hero>div:first-child{display:flex;flex-direction:column;justify-content:center;background:linear-gradient(125deg,#241a57,#51349f 70%,#7956d9);color:#fff;border-radius:23px;padding:clamp(26px,4vw,49px)}
+.hero .eyebrow{color:#e4d5ff}
+.hero .dot{background:#f5c96f}
+.hero h1{font-family:inherit;font-size:clamp(2.5rem,4.6vw,4.3rem);font-weight:850;line-height:1.05;letter-spacing:-.06em}
+.hero h1 span{color:#ffdc8b;text-decoration:none}
+.lead{color:#e6ddfa;font-size:14px;line-height:1.7;margin-bottom:0}
+.heroAside{background:var(--surface);border:1px solid var(--line);color:var(--text);box-shadow:none;border-radius:23px;display:flex;flex-direction:column;justify-content:center}
+.asideLabel{color:var(--accent)}
+.heroAside li{color:var(--text)}
+.heroAside li span{background:var(--accent-bg);color:var(--accent)}
+.workspace{box-shadow:0 12px 35px rgba(30,20,80,.06)}
+.workspaceHead h2{font-family:inherit;font-weight:850}
+.connectionState{min-height:54px}
+.studio a:focus-visible{outline:3px solid #e5a43e;outline-offset:3px}
+@media(max-width:720px){.studio{padding:16px 14px 70px}.hero{grid-template-columns:1fr;gap:12px}.hero>div:first-child{padding:25px 20px;border-radius:19px}.hero h1{font-size:clamp(2.25rem,9vw,3.4rem)}.heroAside{padding:18px;border-radius:18px}.heroAside ol{grid-template-columns:repeat(3,minmax(0,1fr))}.workspace{padding:17px}.breadcrumb{margin-bottom:15px}}
+@media(max-width:380px){.heroAside ol{grid-template-columns:1fr}}

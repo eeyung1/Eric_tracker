@@ -18,7 +18,7 @@ test('lesson progress is read from tutor state and can refresh without resending
 });
 test('readiness states do not expose secrets or learner keys',()=>{
  assert.match(page,/studentTutorAvailability\(\)/);
- assert.match(page,/Learning connection pending/);
+ assert.match(page,/Studio setup pending/);
  assert.match(page,/reason==='mapping'/);
  assert.doesNotMatch(page,/SOTEACH_SERVICE_TOKEN|soteach_learner_key/);
 });
