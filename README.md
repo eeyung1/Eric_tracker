@@ -220,3 +220,13 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Reset history pagination when search or activity type changes.
 - [x] Improve filtered empty states and mobile filter tap targets without changing backend data or authorization.
 - [ ] Validate tracker UX with real mobile users and review public comment moderation/privacy separately.
+
+### Encouragement board mobile experience
+
+- [x] Prevent duplicate comment submissions while a request is pending and reject whitespace-only messages before sending.
+- [x] Show a live remaining-character counter for public encouragement and activity discussion.
+- [x] Display newest general encouragement first so recent messages are easier to find.
+- [x] Initially display five general comments and progressively reveal more without a long mobile scroll.
+- [x] Place the encouragement composer before the discussion feed on mobile, with full-width submit controls and readable long text.
+- [ ] Add mentor-controlled comment moderation (remove/report workflow) and review privacy/abuse controls before broader public promotion.
+- [ ] Validate touch usability and Vercel production deployment on real devices.
