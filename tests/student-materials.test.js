@@ -19,7 +19,7 @@ test('student material APIs enforce sessions, server learner identity and owners
  const page=read('../app/student/materials/page.js');
  for(const source of [list,detail]){assert.match(source,/studentSessionFromRequest/);assert.match(source,/ERIC_TUTOR_LEARNER_ID/);assert.match(source,/learner_id=\$2|learner_id=\$1/);assert.match(source,/no-store/);}
  assert.match(list,/sameOrigin\(request\)/);
- assert.match(detail,/if\(remove\)sameOrigin\(request\)/);
+ assert.match(detail,/if\(action!=='read'\)sameOrigin\(request\)/);
  assert.match(page,/redirect\('\/student\/login'\)/);
 });
 test('schema scopes material rows and blocks duplicate uploads',()=>{
