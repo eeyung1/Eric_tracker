@@ -228,5 +228,9 @@ The transcript is in-memory only, not persisted across browser reloads; SoTeach 
 - [x] Display newest general encouragement first so recent messages are easier to find.
 - [x] Initially display five general comments and progressively reveal more without a long mobile scroll.
 - [x] Place the encouragement composer before the discussion feed on mobile, with full-width submit controls and readable long text.
-- [ ] Add mentor-controlled comment moderation (remove/report workflow) and review privacy/abuse controls before broader public promotion.
+- [x] Add authenticated mentor-only removal of inappropriate comments, including activity-specific discussion comments.
+- [x] Require confirmation before irreversible removal and refresh the admin comment list afterward.
+- [x] Validate comment IDs, return 404 for missing comments, and preserve existing same-origin and admin session checks.
+- [x] Provide touch-friendly removal buttons and regression checks for authorization order.
+- [ ] Add public reporting, audit logs and a review/appeal workflow; review privacy and abuse controls before broader public promotion.
 - [ ] Validate touch usability and Vercel production deployment on real devices.

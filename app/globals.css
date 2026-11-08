@@ -167,3 +167,8 @@ body{max-width:1200px}
  .public-comment-form .public-form-bottom button{width:100%;margin:0}
  .public-comment-form .public-form-bottom span{font-size:12px}
 }
+
+/* Mentor-only moderation action, visible without hover on touch screens. */
+.admin-comment-remove{min-height:44px;margin:4px 0 16px;border:1px solid currentColor;border-radius:9px;padding:9px 13px}
+.admin-comment-remove:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:700px){.admin-comment-remove{width:100%;margin-top:8px}}
