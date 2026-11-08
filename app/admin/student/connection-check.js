@@ -4,7 +4,7 @@ const LABELS={
  setup_required:'Private service configuration is incomplete.',
  learner_mapping_required:'Eric needs a consented SoTeach learner mapping.',
  authorized:'Private session endpoint responded successfully. This is not a complete lesson test.',
- authorized_no_session:'Guardian access appears valid. No active lesson exists yet.',
+ session_not_found:'No active lesson was found. This does not confirm guardian authorization. Ask your mentor to verify consent and try a supervised lesson.',
  authorization_failed:'The service or guardian credentials were rejected.',
  plan_required:'The tutor requires an active learning plan.',
  service_unavailable:'SoTeach is unavailable or returned an unexpected response.',

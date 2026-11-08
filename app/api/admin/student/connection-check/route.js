@@ -36,7 +36,7 @@ export async function POST(request){
    return Response.json({status:'authorized',detail:'Existing session is accessible. This does not verify beginning or completing a lesson.'},{headers});
   }catch(error){
    if(error instanceof SoTeachResponseError){
-    if(error.status===404)return Response.json({status:'authorized_no_session',detail:'Guardian access appears valid; no existing lesson was found. A live lesson still needs testing.'},{headers});
+    if(error.status===404)return Response.json({status:'session_not_found',detail:'No session was found. Authorization cannot be established from this response.'},{headers});
     if(error.status===401||error.status===403)return Response.json({status:'authorization_failed'},{headers});
     if(error.status===402)return Response.json({status:'plan_required'},{headers});
    }
