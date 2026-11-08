@@ -10,7 +10,7 @@ export const dynamic='force-dynamic';
 export default async function StudentTutorPage(){
  const store=await cookies();
  if(!readStudentSession(store.get(STUDENT_COOKIE)?.value))redirect('/student/login');
- const {available:configured}=await studentTutorAvailability();
+ const {available:configured,reason}=await studentTutorAvailability();
  return <main className={styles.studio}>
   <nav className={styles.breadcrumb} aria-label="Learning studio navigation">
    <Link href="/student">← My dashboard</Link><span aria-hidden="true">/</span><span>SoTeach learning studio</span>
@@ -28,9 +28,10 @@ export default async function StudentTutorPage(){
   </header>
   <div className={styles.workspace}>
    <section className={styles.workspaceHead}><div><p className={styles.eyebrow}>YOUR PRIVATE WORKSPACE</p><h2>Guided learning</h2></div><span className={styles.privateBadge}>Private session</span></section>
+   <div className={styles.connectionState} role="status"><span className={configured?styles.readyDot:styles.waitingDot} aria-hidden="true"/><strong>{configured?'Learning connection configured':'Learning connection pending'}</strong><span>{configured?'Your workspace is ready to contact SoTeach.':'Your mentor is completing the protected connection.'}</span></div>
    {configured?<StudentTutorClient/>:<section role="status" className={styles.pending}>
     <h3>Your learning studio is nearly ready</h3>
-    <p>The secure connection to SoTeach is being completed by your mentor. Your learning workspace will open here when setup is finished.</p>
+    <p>{reason==='mapping'?'Your learner profile still needs to be securely linked to SoTeach.':reason==='unavailable'?'The learning connection cannot be checked right now. Your mentor can review the setup.':'The secure connection to SoTeach is being completed by your mentor.'} Your learning workspace will open here when setup is finished.</p>
     <Link href="/student">Return to dashboard</Link>
    </section>}
   </div>

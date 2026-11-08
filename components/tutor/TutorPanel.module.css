@@ -43,3 +43,46 @@
 .learner{background:var(--green-bg,#ecf8f1);color:var(--text,#192b42);border-radius:16px 16px 5px 16px}
 .complete{color:var(--green,#217960)}.error{color:var(--red,#a32d2d)}
 @media(max-width:600px){.panel{padding:20px 0 0}.start{grid-template-columns:1fr}.start label:nth-child(2),.start .hint,.start .primary{grid-column:auto}.messages p{max-width:95%}.header{align-items:flex-start}.secondary{min-height:44px}}
+
+
+/* SoTeach studio v2 — accessible, mobile-first guided learning. */
+.panel{color:var(--text);background:transparent}
+.header h2{font-weight:700;letter-spacing:-.045em}
+.header .secondary{border-radius:999px;font-weight:800}
+.start{gap:20px}
+.topicIdeas{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.topicIdeas>span{font-size:12px;font-weight:800;color:var(--muted);margin-right:5px}
+.topicChip{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;min-height:43px;padding:10px 14px;font-size:12px;font-weight:750;cursor:pointer}
+.topicChip:hover,.topicChip[aria-pressed=true]{border-color:var(--accent);background:var(--accent-bg);color:var(--accent)}
+.start input,.start select,.respond textarea{border-radius:13px;min-height:51px}
+.primary{min-height:51px;border-radius:13px;background:#5738d5;border-color:#5738d5;color:#fff;font-weight:800;box-shadow:0 10px 25px rgba(87,56,213,.16)}
+.primary:hover:not(:disabled){background:#4328ba;border-color:#4328ba}
+.secondary{min-height:47px;border-radius:12px;font-weight:800}
+.lessonTop{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.lessonTop .state{margin:0}
+.stageTrack{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:3px}
+.stageTrack span{font-size:11px;font-weight:800;padding:8px 11px;border-radius:999px;border:1px solid var(--line)}
+.stageCurrent{color:var(--accent);background:var(--accent-bg);border-color:var(--accent)!important}
+.stageDone{color:var(--green);background:var(--green-bg)}
+.stageUpcoming{color:var(--muted);background:var(--surface)}
+.messages{gap:14px;max-height:58vh;scrollbar-width:thin}
+.messages p{border:1px solid var(--line);border-radius:20px;padding:18px 20px;max-width:86%}
+.tutor{background:var(--accent-bg);border-radius:20px 20px 20px 5px!important}
+.learner{background:var(--green-bg);border-radius:20px 20px 5px 20px!important}
+.respond{gap:12px;padding:18px;border:1px solid var(--line);border-radius:19px;background:var(--surface)}
+.respond textarea{min-height:125px;line-height:1.65}
+.complete{border-radius:13px;padding:16px;background:var(--green-bg);color:var(--green)}
+.error{border:1px solid var(--line);border-left:4px solid #b64242;border-radius:12px;padding:14px;background:var(--surface)}
+@media(max-width:600px){
+ .panel{padding:16px 0 0}
+ .start{grid-template-columns:1fr;gap:15px}
+ .topicIdeas{grid-column:1/-1}
+ .topicChip{flex:1 1 auto}
+ .lessonTop .secondary{width:100%}
+ .stageTrack{gap:5px}
+ .stageTrack span{font-size:10px;padding:8px 9px}
+ .messages{max-height:52vh;padding:12px 2px}
+ .messages p{max-width:95%;padding:14px;line-height:1.6}
+ .respond{padding:14px;border-radius:15px}
+ .respond .primary,.start .primary{width:100%}
+}
