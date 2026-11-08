@@ -172,3 +172,19 @@ body{max-width:1200px}
 .admin-comment-remove{min-height:44px;margin:4px 0 16px;border:1px solid currentColor;border-radius:9px;padding:9px 13px}
 .admin-comment-remove:disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:700px){.admin-comment-remove{width:100%;margin-top:8px}}
+
+/* Visitor reporting and private mentor moderation queue. */
+.comment-report{margin-top:9px;font-size:12px;color:var(--muted)}
+.comment-report summary{cursor:pointer;display:inline-flex;align-items:center;min-height:40px;color:var(--accent)}
+.comment-report form{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin:8px 0}
+.comment-report label{display:grid;gap:5px;flex:1 1 180px}
+.comment-report select{min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.comment-report button{min-height:44px}
+.moderation-reports{padding:18px;border:1px solid var(--line);border-radius:12px;margin:18px 0}
+.moderation-report{padding:14px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.moderation-report p{margin:8px 0}
+.moderation-actions{display:flex;flex-wrap:wrap;gap:10px}
+.moderation-actions button{min-height:44px}
+.moderation-audit{margin:14px 0 22px}
+.moderation-audit summary{cursor:pointer;min-height:44px}
+@media(max-width:700px){.moderation-actions button,.comment-report button{width:100%}.moderation-reports{padding:14px}}
