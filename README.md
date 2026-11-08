@@ -394,3 +394,15 @@ are not yet forwarded to SoTeach and saving materials never earns points.
 - [ ] Automatic 5/2/2 credits remain blocked on authoritative SoTeach learning
   events; saving, renaming, previewing and exporting earn no points.
 - [ ] Verify these changes on production after Vercel deployment quota resets.
+
+### Next five SoTeach learning-material milestones (November 2026)
+
+Execution order: each feature follows branch → commit/push → PR → required CI and deployment checks → merge → README verification; do not mark unfinished work complete.
+
+- [ ] **1. PDF/DOCX ingestion:** private binary storage, bounded isolated extraction, validated DOCX ZIP members, PDF page provenance, learner-owned upload/list/read/delete, and browser acceptance. Draft PR #49 currently contains **preflight validation only** (size, signature and container trailers); it does not enable binary uploads.
+- [ ] **2. Select material for SoTeach:** authenticated material-to-session binding, guardian authorization, ownership verification and upstream Go API contract; prove selection survives resume.
+- [ ] **3. Grounded Socratic teaching:** teach only from authorized selected content, cite page/passage evidence, evaluate understanding and test absent/contradictory sources.
+- [ ] **4. Automatic 5/2/2 points:** trusted milestone events, exactly-once Neon ledger, per-lesson caps, mentor audit/reversal and reconciliation. No points for uploads or chat volume.
+- [ ] **5. Mentor review and production acceptance:** learner-progress visibility, supervised end-to-end tests, privacy/security checks, mobile QA and production deployment confirmation.
+
+**Deployment gate:** The PR #49 commit status currently reports a Vercel build-rate-limit failure. This is not a passing deployment or successful CI. Do not merge until required checks are verified and the deployment constraint is resolved.
