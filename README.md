@@ -365,3 +365,19 @@ database migration is applied. Only the server uses the configured
 `ERIC_TUTOR_LEARNER_ID`; client-supplied learner identities are ignored.
 Notes are stored as private database text, not public URLs. Material contents
 are not yet forwarded to SoTeach and saving materials never earns points.
+
+### Studio document import and selection batch
+
+- [x] Investigate historic homepage branch Vercel failure: missing
+  `app/home.module.css` at commit `e0b70cb`; later builds contain the file.
+- [x] Pin Node runtime to 24.x to match Vercel project configuration.
+- [x] Add bounded authenticated import of UTF-8 TXT, Markdown, CSV and JSON
+  documents to Eric's existing private materials database.
+- [x] Add learner-owned selection and private bounded lesson-preview endpoint.
+- [x] Add mobile-friendly file chooser, material selection and regression tests.
+- [ ] Implement secure PDF/DOCX extraction and private binary storage.
+- [ ] Connect selected materials to an authoritative SoTeach Go grounded
+  lesson API; a preview is **not** a live document-grounded lesson.
+- [ ] Implement verified, exactly-once automatic 5/2/2 point credits.
+- [ ] Verify the latest production deployment is READY and test student upload
+  and selection against live database.
