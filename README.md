@@ -283,3 +283,14 @@ The moderation schema is in `database/003_comment_moderation.sql` and was applie
 - [x] Build a cohesive typography, spacing, card and colour system in a scoped homepage stylesheet instead of extending global CSS overrides.
 - [x] Adapt hero, illustration, cards and actions for narrow mobile screens; preserve focus visibility and reduced-motion behavior.
 - [ ] Conduct real-phone visual QA, colour contrast review and user acceptance before calling the redesign finished.
+
+### Modern app dashboard experience — student and mentor
+
+- [x] Reorganize the student dashboard around one prominent lesson action, next-step panel and accessible progress destination.
+- [x] Replace the misleading student progress “coming soon” tile with a working public tracker link.
+- [x] Give the mentor dashboard a distinct app identity, primary recording action and quick history access.
+- [x] Make mentor navigation task-based, scrollable and sticky on small screens; show pending report counts rather than all comments.
+- [x] Refresh dashboard card, metric, input, spacing and mobile visual hierarchy with scoped styles and responsive breakpoints.
+- [x] Add regression checks for auth, real navigation targets, moderation and responsive layouts.
+- [ ] Verify visual polish on real Android/iPhone devices and keyboard/screen-reader flows.
+- [ ] Validate Vercel deployment and conduct a user acceptance review before declaring the full redesign complete.
