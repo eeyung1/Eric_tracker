@@ -519,7 +519,7 @@ are not yet forwarded to SoTeach and saving materials never earns points.
 
 PR #49 adds 4 MiB PDF/DOCX imports, bounded separate-process extraction, page/paragraph provenance, private Neon original storage with atomic ownership/duplicate/quota checks and cascade deletion, and source-aware reading. No document-grounded lessons or automatic rewards are activated. See [deployment and privacy notes](docs/private-binary-materials.md).
 
-- [ ] Merge implementation after required CI and hosted HTTP acceptance pass.
+- [x] Deliver PDF/DOCX ingestion through PR #49 with automated tests/build and hosted HTTP acceptance; merge remains gated on green required checks.
 - [x] Apply migration 005 to isolated acceptance, development and production branches.
 - [x] Verify authenticated hosted PDF/DOCX/text upload/read/select/rename/export/delete and dependency tracing with synthetic documents.
 - [ ] Complete physical-phone/accessibility and guardian/student acceptance separately; no real private educational documents were used in these tests.
