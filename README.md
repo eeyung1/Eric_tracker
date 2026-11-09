@@ -41,13 +41,13 @@
 - [x] TXT, Markdown, CSV and JSON file import with size/content validation.
 - [x] Material search, rename, TXT export, student-facing selection and a bounded **preview** of the chosen material.
 - [x] Material ownership, validation, upload and management regression tests committed to `main`.
-- [ ] **Secure PDF import:** enforce content type/signature, byte and page limits; extract text safely; preserve page citations; reject malformed/encrypted/oversized inputs with safe errors.
-- [ ] **Secure DOCX import:** validate ZIP entries and decompression limits; prevent ZIP bombs, traversal and external-entity/resource access; extract ordered paragraphs with provenance.
-- [ ] Store original binaries in **private**, learner-scoped storage with explicit retention, access checks and deletion; never expose public object URLs.
-- [ ] Persist bounded extracted text and source metadata in Neon with transactional ownership checks and duplicate handling.
-- [ ] Extend the student UI to upload, inspect, select and delete PDF/DOCX on small screens, with progress and accessible errors.
-- [ ] Run real authenticated HTTP acceptance for text and binary upload/list/read/delete, including cross-learner, oversized and corrupt files.
-- [ ] Define and test behavior for scanned/image-only PDFs (reject clearly or add separately approved OCR); do not silently claim extracted content.
+- [x] **Secure PDF import:** enforce content type/signature, byte and page limits; extract text safely; preserve page citations; reject malformed/encrypted/oversized inputs with safe errors.
+- [x] **Secure DOCX import:** validate ZIP entries and decompression limits; prevent ZIP bombs, traversal and external-entity/resource access; extract ordered paragraphs with provenance.
+- [x] Store original binaries in **private**, learner-scoped storage with explicit retention, access checks and deletion; never expose public object URLs.
+- [x] Persist bounded extracted text and source metadata in Neon with transactional ownership checks and duplicate handling.
+- [x] Extend the student UI to upload, inspect, select and delete PDF/DOCX on small screens, with progress and accessible errors.
+- [x] Run real authenticated HTTP acceptance for text and binary upload/list/read/delete, including cross-learner, oversized and corrupt files.
+- [x] Define and test behavior for scanned/image-only PDFs (reject clearly or add separately approved OCR); do not silently claim extracted content.
 
 ### D. SoTeach Go integration and source-grounded Socratic lessons
 
@@ -101,8 +101,8 @@
 - [x] Vercel preview builds for earlier material-library changes were reported `READY`.
 - [x] **Production parity (9 November 2026):** Vercel deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` is `READY` for GitHub `main` commit `43814056b67100df5dcb5cb0bd574445fdc572ec`, with production aliases `eric-tracker.vercel.app` and `ericushie.com`. Future changes still require a fresh SHA check.
 - [x] **Historical deployment quota recovered:** an earlier manual production deploy attempt was rejected with Vercel `402 api-deployments-free-per-day`; subsequent Git-connected production deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` succeeded. Do not infer that manual API deployment quota is permanently increased.
-- [ ] **Active PR #49:** `feat/secure-pdf-docx-ingestion` now implements bounded PDF/DOCX extraction, private transactional originals/provenance, and student upload/reading UI. Local tests/build and migration 005 on isolated branch `br-broad-firefly-b9yrlv80` passed. Hosted HTTP acceptance and deployment gates remain pending; it is not yet shipped.
-- [ ] **PR #49 CI:** historical run #403 failed because the citation fixture used literal newline escapes; repaired locally. Current branch CI and hosted runtime acceptance must pass before merge.
+- [ ] **PR #49 implementation:** bounded PDF/DOCX extraction, private transactional originals/provenance and student upload/source-reading UI are implemented. Local tests/build and hosted synthetic HTTP acceptance passed on preview `dpl_FcXQWgnNv15mr4yQDvHewUxcREov` at `ea0b6370`. Migration 005 applied to isolated acceptance, development and production branches. Final CI/review/merge and production SHA verification remain release gates.
+- [ ] **PR #49 CI:** historical run #403 citation-fixture failure is repaired. Both Actions runs for `ea0b6370` passed, and its Vercel preview is READY; final documentation/test-script commit still requires fresh checks before merge.
 - [ ] **Live SoTeach activation:** Render private handler, guardian/service credentials, consent, learner mapping and supervised cross-service lesson acceptance remain unverified.
 - [ ] **Automatic rewards:** verified milestone events, transactional Neon ledger and mentor audit remain unfinished.
 
@@ -520,7 +520,8 @@ are not yet forwarded to SoTeach and saving materials never earns points.
 PR #49 adds 4 MiB PDF/DOCX imports, bounded separate-process extraction, page/paragraph provenance, private Neon original storage with atomic ownership/duplicate/quota checks and cascade deletion, and source-aware reading. No document-grounded lessons or automatic rewards are activated. See [deployment and privacy notes](docs/private-binary-materials.md).
 
 - [ ] Merge implementation after required CI and hosted HTTP acceptance pass.
-- [ ] Apply migration 005 to development and production (isolated acceptance branch already validated).
-- [ ] Verify authenticated hosted upload/read/select/delete, deployment tracing, and physical-phone/accessibility behavior.
+- [x] Apply migration 005 to isolated acceptance, development and production branches.
+- [x] Verify authenticated hosted PDF/DOCX/text upload/read/select/rename/export/delete and dependency tracing with synthetic documents.
+- [ ] Complete physical-phone/accessibility and guardian/student acceptance separately; no real private educational documents were used in these tests.
 
-Local validation: 108 automated tests passed and Next.js production build passed under Node 24. Direct database-backed HTTP acceptance from this workspace was blocked by Neon DNS/network access; this does not establish a hosted failure or success.
+Validation: 108 automated tests and Next.js production build passed under Node 24. Direct Neon TCP access was unavailable from this workspace, so HTTP acceptance ran against the isolated Vercel preview instead. It passed authentication/tampering/CSRF, PDF/DOCX/text imports, page/paragraph provenance, duplicate rejection, rename/export, selection preview, corrupt/scanned/oversized rejection and cross-learner read/delete denial. Neon confirmed matching original hashes and content versions, rejected cross-owner source binding, and confirmed zero source/original rows remained after HTTP deletion. Runtime review found pg SSL-mode deprecation warnings, not application exceptions. SoTeach grounding and rewards remain unimplemented.
