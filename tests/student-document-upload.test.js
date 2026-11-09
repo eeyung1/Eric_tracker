@@ -29,5 +29,6 @@ test('upload API enforces streaming byte cap and same origin',()=>{
  assert.match(route,/sameOrigin\(request\)/);
  assert.match(route,/studentSessionFromRequest/);
  assert.match(route,/reader\.read\(\)/);
- assert.match(route,/MAX_NOTE_BYTES\+12000/);
+ assert.match(route,/MAX_UPLOAD_BYTES\+12000/);
 });
+

@@ -1,5 +1,125 @@
 # Eric — A Learning Journey
 
+## MVP delivery dashboard — source of truth (reviewed 9 November 2026)
+
+> **Scope and evidence:** The checkboxes below distinguish code merged into `main`, infrastructure previously verified, and capabilities that still require live end-to-end acceptance. A passing unit test is **not** proof of an operating Render/Neon/Vercel integration. A feature present only in an open PR is **not** checked off as shipped. Older chronological sections below are retained as implementation history; where they contain outdated future-tense statements, this dashboard takes precedence. **MVP is not complete.**
+
+**MVP promise:** Eric can sign in privately, import course material, choose it, complete a consented and source-grounded Socratic lesson, receive only trustworthy verified learning rewards, and let Emmanuel/Mr. Greg monitor progress; public visitors can follow the growth tracker and leave moderated encouragement. The app must be secure, accessible on mobile, tested against real services, and deployed from an approved commit.
+
+**Legend:** `[x]` = implementation is merged in `main` or the explicitly stated infrastructure check was verified; `[ ]` = not implemented, not merged, not configured, or not independently accepted. The word *implemented* means code exists, not necessarily live-ready. Each item must be checked only when its **whole** description is satisfied.
+
+### A. Public journey, growth tracker and mentor administration
+
+- [x] Public homepage, tracker, criteria guide, activity history, live summary, and shared responsive navigation.
+- [x] Mobile menu, search and progressive reveal of activities, encouragement feed, light/dark styling and reduced-motion controls.
+- [x] Eleven configurable default reward criteria and versioned initial Neon schema.
+- [x] Admin-only Emmanuel/Mr. Greg sign-in, signed HttpOnly sessions, protected entry/category/redemption operations and server-calculated points.
+- [x] Request-idempotent manual entries/redemptions, serialized balance checks and history-preserving category snapshots.
+- [x] Public comments, input validation and rate limiting; mentor comment removal, public reporting, mentor review and private moderation audit.
+- [x] Comment moderation migration (`database/003_comment_moderation.sql`) recorded as applied in Neon.
+- [ ] Agree and configure the cash conversion value per point, **if** cash rewards are part of the MVP. Until approved, display points without invented currency.
+- [ ] Complete production-grade comment moderation abuse controls, appeal/retention decisions and a public-content privacy review.
+- [ ] Run authenticated production or controlled-preview acceptance for both mentors, real manual entries/redemptions, moderation, concurrency and recovery.
+- [ ] Confirm public-facing copy and personal information have guardian/owner approval.
+
+### B. Student identity, access and mentoring visibility
+
+- [x] Student-only scrypt password verification, separate short-lived signed session cookie, login/logout routes and rate limiting.
+- [x] Protected student dashboard, learning-studio navigation, private material library and mobile-first sign-in.
+- [x] Server-derived Eric learner identity for tutoring and material routes; no browser-supplied learner ID is trusted.
+- [x] Mentor-only student monitoring/readiness dashboard and guarded SoTeach connection probe with non-secret status messages.
+- [x] Eric's learner record and `ERIC_TUTOR_LEARNER_ID` recorded as provisioned in production Neon/Vercel; private schema 002 tested on an isolated branch.
+- [ ] Independently confirm current student login secrets, session expiry, lockout and student/mentor role separation on a live deployment.
+- [ ] Verify the actual student-to-SoTeach learner mapping is durable, unique, consented and resistant to cross-learner access.
+- [ ] Test session invalidation after password rotation and unauthorized access to every student and mentor API.
+- [ ] Obtain guardian consent for use of uploaded educational content by the external tutoring service, including storage and deletion expectations.
+
+### C. Learning material library and import
+
+- [x] Private learner-owned material schema (`database/004_learning_materials.sql`) and migrations recorded as applied to development and production Neon.
+- [x] Authenticated, same-origin text-note creation, bounded text storage, duplicate detection, private list/read/delete and no-store responses.
+- [x] TXT, Markdown, CSV and JSON file import with size/content validation.
+- [x] Material search, rename, TXT export, student-facing selection and a bounded **preview** of the chosen material.
+- [x] Material ownership, validation, upload and management regression tests committed to `main`.
+- [ ] **Secure PDF import:** enforce content type/signature, byte and page limits; extract text safely; preserve page citations; reject malformed/encrypted/oversized inputs with safe errors.
+- [ ] **Secure DOCX import:** validate ZIP entries and decompression limits; prevent ZIP bombs, traversal and external-entity/resource access; extract ordered paragraphs with provenance.
+- [ ] Store original binaries in **private**, learner-scoped storage with explicit retention, access checks and deletion; never expose public object URLs.
+- [ ] Persist bounded extracted text and source metadata in Neon with transactional ownership checks and duplicate handling.
+- [ ] Extend the student UI to upload, inspect, select and delete PDF/DOCX on small screens, with progress and accessible errors.
+- [ ] Run real authenticated HTTP acceptance for text and binary upload/list/read/delete, including cross-learner, oversized and corrupt files.
+- [ ] Define and test behavior for scanned/image-only PDFs (reject clearly or add separately approved OCR); do not silently claim extracted content.
+
+### D. SoTeach Go integration and source-grounded Socratic lessons
+
+- [x] Documented private SoTeach integration contract and server-only transport with HTTPS, timeouts, bounded responses and sanitized errors.
+- [x] Authenticated Next.js tutor proxy, strict input validation, per-learner rate limiting and no-store responses.
+- [x] Student learning studio UI for begin/input/resume, connection readiness, stages, answer drafting and mobile recovery.
+- [x] Mocked tests for private dual-auth headers, error handling, payload validation, streaming response limits and UI recovery.
+- [ ] Deploy/verify the private SoTeach Go `/internal/` endpoints on Render with valid service and guardian tokens.
+- [ ] Provision and validate guardian-scoped consent and Eric's external SoTeach learner identity in both services.
+- [ ] Implement a **document-selection-to-session** contract: server verifies material ownership, binds a specific immutable content version to the lesson and supports resume.
+- [ ] Implement Go document-grounded prompting and response validation: questions and feedback derive from the selected authorized material rather than arbitrary model output.
+- [ ] Return trustworthy page/paragraph source citations, reject invented citations and handle absent or contradictory source material.
+- [ ] Persist/resume actual tutoring sessions and demonstrate a full private begin → answer → feedback → resume journey.
+- [ ] Run cross-service integration tests against Render and Neon for guardian denial, cross-learner access, stale/deleted materials, timeouts and restarts.
+- [ ] Supervise one complete lesson with Eric and mentor approval; record the acceptance result without publishing private material.
+
+### E. Automatic verified learning rewards (proposed 5/2/2)
+
+- [x] Written reward/event-authenticity contract and versioned policy helpers with deterministic idempotency keys and per-lesson limits.
+- [x] Tests rejecting forged, unverified, wrong-learner, upload-only and message-count-only reward claims.
+- [x] Owner approval of the **proposed** 5/2/2 reward weights is recorded in the development history.
+- [ ] Implement SoTeach **server-originated, signed/authenticated** milestone events for demonstrated mastery (5), practice (2) and corrected misconception (2).
+- [ ] Validate event provenance, learner/session binding, milestone evidence and policy version on Eric Tracker's server; never award based on client-supplied points.
+- [ ] Create/apply Neon reward-event ledger migration and implement **exactly-once** transactional credit with unique event IDs, per-lesson caps and safe retries.
+- [ ] Integrate automatic credits with existing balance/history without permitting duplicate or overspending transactions.
+- [ ] Add mentor-only event evidence, audit, reversal and reconciliation workflow with immutable correction history.
+- [ ] Test retries, concurrent duplicate events, forged signatures, wrong learners, expired consent, rollbacks and reconciliation.
+- [ ] Verify real milestone → ledger → student progress → mentor review end to end. **No automatic rewards are live yet.**
+
+### F. Security, privacy, quality and launch acceptance
+
+- [x] Server-side secrets and parameterized database queries; distinct admin/student authentication boundaries.
+- [x] Origin checks, request throttling, bounded payloads, sanitized tutoring errors and privacy-aware response caching in the implemented routes.
+- [x] Automated unit/regression test suite and GitHub Actions CI workflow.
+- [x] Vercel project and production domain established; deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` is `READY` at commit `43814056` (9 November 2026).
+- [ ] Complete a migration audit on both Neon branches, including a reproducible upgrade and rollback procedure.
+- [ ] Establish private material backup/deletion/retention and least-privilege credentials; confirm no learner documents, tokens or identifiers leak to public routes/logs.
+- [ ] Add automated end-to-end browser/API tests for public, mentor and student journeys on a disposable Neon database.
+- [ ] Test on physical Android/iPhone devices, keyboard navigation, screen readers, contrast, error recovery and low-bandwidth connections.
+- [ ] Perform a security acceptance pass: broken access control, CSRF, replay, rate-limit bypass, file parsing abuse and consent revocation.
+- [ ] Run a mentor-and-student MVP acceptance session with explicit pass/fail evidence.
+- [ ] Deploy the latest approved `main` commit to Vercel production and verify its exact SHA, healthy routes and actual database/Render connectivity.
+- [ ] Confirm production monitoring, rollback instructions and incident contacts before announcing MVP availability.
+
+### G. Deployment and active development blockers (9 November 2026)
+
+**Verified recovery:** Historical failed preview `dpl_FFAwWzwkdMKADBCEi77YbZJKox57` failed at `app/page.js:4` because `./home.module.css` was absent in commit `e0b70cb`. The current `main` contains `app/home.module.css` and pins Node `24.x`; the successful Vercel production deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` built commit `43814056` and has the project and custom-domain aliases. This confirms build recovery, **not** real-device UX or authenticated end-to-end SoTeach acceptance.
+
+
+- [x] Vercel account/project connection was independently queried; existing production deployment is `READY`.
+- [x] Vercel preview builds for earlier material-library changes were reported `READY`.
+- [x] **Production parity (9 November 2026):** Vercel deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` is `READY` for GitHub `main` commit `43814056b67100df5dcb5cb0bd574445fdc572ec`, with production aliases `eric-tracker.vercel.app` and `ericushie.com`. Future changes still require a fresh SHA check.
+- [x] **Historical deployment quota recovered:** an earlier manual production deploy attempt was rejected with Vercel `402 api-deployments-free-per-day`; subsequent Git-connected production deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` succeeded. Do not infer that manual API deployment quota is permanently increased.
+- [ ] **Active PR #49:** `feat/secure-pdf-docx-ingestion` now implements bounded PDF/DOCX extraction, private transactional originals/provenance, and student upload/reading UI. Local tests/build and migration 005 on isolated branch `br-broad-firefly-b9yrlv80` passed. Hosted HTTP acceptance and deployment gates remain pending; it is not yet shipped.
+- [ ] **PR #49 CI:** historical run #403 failed because the citation fixture used literal newline escapes; repaired locally. Current branch CI and hosted runtime acceptance must pass before merge.
+- [ ] **Live SoTeach activation:** Render private handler, guardian/service credentials, consent, learner mapping and supervised cross-service lesson acceptance remain unverified.
+- [ ] **Automatic rewards:** verified milestone events, transactional Neon ledger and mentor audit remain unfinished.
+
+### H. Ordered execution plan — remaining five delivery features
+
+Each feature must use **branch → implementation → push → PR → CI green → review → merge → README checkbox update → next feature**. If Vercel preview quota blocks deployment, continue coding/testing but **do not** mislabel deployment checks as passing; record the exception and obtain approval if branch protection requires that check. No co-authored commit trailers.
+
+1. **PDF/DOCX ingestion and private storage** — complete all unchecked items in section C; include extraction security, provenance, student UI and real HTTP acceptance. Do not merge partial preflight work as a finished importer.
+2. **Selected material → private SoTeach session** — implement server-verified ownership/consent, document version binding, begin/resume contract and Render authorization tests.
+3. **Grounded Socratic lesson + citations** — teach and assess from authorized passages; return validated citations; test missing/conflicting content and full learner session.
+4. **Exactly-once automatic 5/2/2 awards** — authoritative Go events, Neon event ledger, cap enforcement, retry safety and mentor reconciliation.
+5. **Mentor oversight, security and MVP acceptance** — complete audit/reversal, E2E tests, mobile/accessibility/privacy verification, real learner/guardian acceptance and final deployment verification.
+
+**MVP exit gate:** All critical unchecked items in sections B–F are completed or explicitly scoped out with written owner approval; migrations and live integrations are verified; all five delivery PRs are merged with green required CI; the production commit matches approved `main`; the student and mentors successfully complete a real private document-grounded lesson and verified reward flow. Until then, **MVP status = in development**.
+
+---
+
 Eric’s personal learning website, with a dedicated growth tracker. The homepage introduces the learning journey and displays live progress; Emmanuel and Mr. Greg manage points and rewards through /admin. Visitors can read activities and leave encouragement on the tracker.
 
 ## Stack and current status
@@ -335,8 +455,7 @@ automatically for trusted, verified learning milestones. See
   per-lesson caps, reconciliation and mentor audit/reversal workflow.
 - [ ] Obtain mentor approval of proposed reward weights (5/2/2), provision
   consent and private credentials, and run supervised live acceptance.
-- [ ] Investigate reported Vercel homepage redesign deployment failure via
-  actual Vercel logs. GitHub CI success is not deployment verification.
+- [x] Investigate the historical Vercel homepage redesign failure via actual build logs: commit `e0b70cb` imported absent `./home.module.css`. The stylesheet is now present on `main`, and a subsequent production build is `READY`.
 
 ### Private learning materials — five-feature delivery batch
 
@@ -395,14 +514,13 @@ are not yet forwarded to SoTeach and saving materials never earns points.
   events; saving, renaming, previewing and exporting earn no points.
 - [ ] Verify these changes on production after Vercel deployment quota resets.
 
-### Next five SoTeach learning-material milestones (November 2026)
 
-Execution order: each feature follows branch → commit/push → PR → required CI and deployment checks → merge → README verification; do not mark unfinished work complete.
+### PDF/DOCX ingestion implementation — 9 November 2026
 
-- [ ] **1. PDF/DOCX ingestion:** private binary storage, bounded isolated extraction, validated DOCX ZIP members, PDF page provenance, learner-owned upload/list/read/delete, and browser acceptance. Draft PR #49 currently contains **preflight validation only** (size, signature and container trailers); it does not enable binary uploads.
-- [ ] **2. Select material for SoTeach:** authenticated material-to-session binding, guardian authorization, ownership verification and upstream Go API contract; prove selection survives resume.
-- [ ] **3. Grounded Socratic teaching:** teach only from authorized selected content, cite page/passage evidence, evaluate understanding and test absent/contradictory sources.
-- [ ] **4. Automatic 5/2/2 points:** trusted milestone events, exactly-once Neon ledger, per-lesson caps, mentor audit/reversal and reconciliation. No points for uploads or chat volume.
-- [ ] **5. Mentor review and production acceptance:** learner-progress visibility, supervised end-to-end tests, privacy/security checks, mobile QA and production deployment confirmation.
+PR #49 adds 4 MiB PDF/DOCX imports, bounded separate-process extraction, page/paragraph provenance, private Neon original storage with atomic ownership/duplicate/quota checks and cascade deletion, and source-aware reading. No document-grounded lessons or automatic rewards are activated. See [deployment and privacy notes](docs/private-binary-materials.md).
 
-**Deployment gate:** The PR #49 commit status currently reports a Vercel build-rate-limit failure. This is not a passing deployment or successful CI. Do not merge until required checks are verified and the deployment constraint is resolved.
+- [ ] Merge implementation after required CI and hosted HTTP acceptance pass.
+- [ ] Apply migration 005 to development and production (isolated acceptance branch already validated).
+- [ ] Verify authenticated hosted upload/read/select/delete, deployment tracing, and physical-phone/accessibility behavior.
+
+Local validation: 108 automated tests passed and Next.js production build passed under Node 24. Direct database-backed HTTP acceptance from this workspace was blocked by Neon DNS/network access; this does not establish a hosted failure or success.

@@ -18,3 +18,4 @@ test('rejects renamed files, paths, truncated containers and oversized input',()
  {name:'huge.pdf',bytes:new Uint8Array(MAX_BINARY_DOCUMENT_BYTES+1)}
  ]) assert.throws(()=>preflightBinaryDocument(input),TypeError);
 });
+

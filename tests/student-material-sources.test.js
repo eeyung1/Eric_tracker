@@ -13,3 +13,4 @@ test('large source material is bounded and malformed material rejected',()=>{
  assert.ok(result.every(x=>x.text.length<=1200));
  assert.throws(()=>buildMaterialSourceChunks({id:'invalid',content:'hello'}),TypeError);
 });
+

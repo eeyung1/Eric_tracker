@@ -3,7 +3,10 @@ import {studentSessionFromRequest} from '../../../../../lib/student-security.js'
 import {sameOrigin,HttpError} from '../../../../../lib/validation.js';
 import {getPool} from '../../../../../lib/db.js';
 import {parseStudyFile,MAX_NOTE_BYTES} from '../../../../../lib/student-material-file.js';
+import {extractBinaryDocument,MAX_UPLOAD_BYTES} from '../../../../../lib/extract-binary-document.js';
+import {saveBinaryMaterial} from '../../../../../lib/save-binary-material.js';
 export const runtime='nodejs';
+export const maxDuration=30;
 export const dynamic='force-dynamic';
 const headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
 export async function POST(request){
@@ -16,20 +19,27 @@ export async function POST(request){
   const type=request.headers.get('content-type')||'';
   if(!type.startsWith('multipart/form-data;'))throw new HttpError(415,'Multipart form required');
   const size=Number(request.headers.get('content-length'));
-  if(Number.isFinite(size)&&size>MAX_NOTE_BYTES+12000)throw new HttpError(413,'File too large');
+  if(Number.isFinite(size)&&size>MAX_UPLOAD_BYTES+12000)throw new HttpError(413,'File too large');
   // Stream with a hard cap: Content-Length is advisory and can be absent.
   const reader=request.body?.getReader();if(!reader)throw new HttpError(400,'Empty upload');
   const chunks=[];let total=0;
   try{while(true){const {done,value}=await reader.read();if(done)break;total+=value.byteLength;
-    if(total>MAX_NOTE_BYTES+12000){await reader.cancel();throw new HttpError(413,'File too large');}chunks.push(value);}}
+    if(total>MAX_UPLOAD_BYTES+12000){await reader.cancel();throw new HttpError(413,'File too large');}chunks.push(value);}}
   finally{reader.releaseLock();}
   const bounded=new Uint8Array(total);let at=0;for(const chunk of chunks){bounded.set(chunk,at);at+=chunk.byteLength;}
   const safeRequest=new Request(request.url,{method:'POST',headers:{'content-type':type},body:bounded});
   const form=await safeRequest.formData();
   if([...form.keys()].length!==1||!form.has('file'))throw new HttpError(400,'Exactly one file is required');
   const file=form.get('file');
-  if(!file||typeof file.arrayBuffer!=='function'||file.size>MAX_NOTE_BYTES)throw new HttpError(413,'File too large');
-  const {title,content,contentHash}=parseStudyFile({name:file.name,bytes:new Uint8Array(await file.arrayBuffer())});
+  if(!file||typeof file.arrayBuffer!=='function'||file.size>MAX_UPLOAD_BYTES)throw new HttpError(413,'File too large');
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  if(/\.(pdf|docx)$/i.test(file.name)){
+   const material=await extractBinaryDocument({name:file.name,bytes,mime:file.type});
+   const saved=await saveBinaryMaterial(getPool(),{learner,bytes,material});
+   return Response.json({material:saved},{status:201,headers});
+  }
+  if(bytes.length>MAX_NOTE_BYTES)throw new HttpError(413,'File too large');
+  const {title,content,contentHash}=parseStudyFile({name:file.name,bytes});
   const {rows}=await getPool().query('INSERT INTO student_learning_materials(id,learner_id,title,content,content_sha256) VALUES($1,$2,$3,$4,$5) RETURNING id,title,created_at',[randomUUID(),learner,title,content,contentHash]);
   return Response.json({material:rows[0]},{status:201,headers});
  }catch(error){
@@ -37,3 +47,4 @@ export async function POST(request){
   return Response.json({error:status===401?'Student sign-in required.':status===400?(error.message||'Unsupported document.'):status===413?'File too large.':status===415?'Upload a supported file.':status===409?'This material is already saved.':status===503?'Material library is not configured.':'Unable to upload document.'},{status,headers});
  }
 }
+
