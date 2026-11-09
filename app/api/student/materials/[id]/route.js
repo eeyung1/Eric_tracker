@@ -25,6 +25,10 @@ async function handle(request,context,action){
   }else sql='SELECT id,title,content,created_at FROM student_learning_materials WHERE id=$1 AND learner_id=$2';
   const {rows}=await getPool().query(sql,params);
   if(!rows.length)throw new HttpError(404,'Not found');
+  if(action==='read'){
+   const source=await getPool().query('SELECT format,content_version,passages FROM student_material_sources WHERE material_id=$1 AND learner_id=$2',[id,learnerId]);
+   if(source.rows.length)rows[0].source=source.rows[0];
+  }
   return Response.json(action==='delete'?{deleted:true}:{material:rows[0]},{headers});
  }catch(error){const status=error instanceof HttpError?error.status:500;return Response.json({error:status===401?'Student sign-in required.':status===404?'Material not found.':status===400?'Invalid material title.':status===503?'Material library is not configured.':'Unable to access material.'},{status,headers});}
 }
@@ -32,3 +36,4 @@ export async function GET(request,context){return handle(request,context,'read')
 export async function DELETE(request,context){return handle(request,context,'delete');}
 
 export async function PATCH(request,context){return handle(request,context,'rename');}
+
