@@ -82,7 +82,7 @@
 - [x] Server-side secrets and parameterized database queries; distinct admin/student authentication boundaries.
 - [x] Origin checks, request throttling, bounded payloads, sanitized tutoring errors and privacy-aware response caching in the implemented routes.
 - [x] Automated unit/regression test suite and GitHub Actions CI workflow.
-- [x] Vercel project and production domain established; a prior production deployment was confirmed `READY`.
+- [x] Vercel project and production domain established; deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` is `READY` at commit `43814056` (9 November 2026).
 - [ ] Complete a migration audit on both Neon branches, including a reproducible upgrade and rollback procedure.
 - [ ] Establish private material backup/deletion/retention and least-privilege credentials; confirm no learner documents, tokens or identifiers leak to public routes/logs.
 - [ ] Add automated end-to-end browser/API tests for public, mentor and student journeys on a disposable Neon database.
@@ -94,10 +94,13 @@
 
 ### G. Deployment and active development blockers (9 November 2026)
 
+**Verified recovery:** Historical failed preview `dpl_FFAwWzwkdMKADBCEi77YbZJKox57` failed at `app/page.js:4` because `./home.module.css` was absent in commit `e0b70cb`. The current `main` contains `app/home.module.css` and pins Node `24.x`; the successful Vercel production deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` built commit `43814056` and has the project and custom-domain aliases. This confirms build recovery, **not** real-device UX or authenticated end-to-end SoTeach acceptance.
+
+
 - [x] Vercel account/project connection was independently queried; existing production deployment is `READY`.
 - [x] Vercel preview builds for earlier material-library changes were reported `READY`.
-- [ ] **Production parity:** the last confirmed production deployment was built from `913ff9d`, not the latest `main` changes. Recheck SHA before marking complete.
-- [ ] **Deployment quota:** an attempted production Git deployment was rejected with Vercel `402 api-deployments-free-per-day`. Retry after allowance resets or owner resolves account limits; do not call the rejected request a deployment.
+- [x] **Production parity (9 November 2026):** Vercel deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` is `READY` for GitHub `main` commit `43814056b67100df5dcb5cb0bd574445fdc572ec`, with production aliases `eric-tracker.vercel.app` and `ericushie.com`. Future changes still require a fresh SHA check.
+- [x] **Historical deployment quota recovered:** an earlier manual production deploy attempt was rejected with Vercel `402 api-deployments-free-per-day`; subsequent Git-connected production deployment `dpl_AwJmWoSPQqwPqsZ6YgpWCyVxxADC` succeeded. Do not infer that manual API deployment quota is permanently increased.
 - [ ] **Open draft PR #49:** `feat/secure-pdf-docx-ingestion` contains preflight validation and preparatory source/citation code, **not** complete PDF/DOCX ingestion. It remains unmerged and must not be counted as shipped.
 - [ ] **PR #49 CI:** GitHub Actions run #403 failed. Diagnose current branch checks, repair failures, finish feature acceptance and only then merge.
 - [ ] **Live SoTeach activation:** Render private handler, guardian/service credentials, consent, learner mapping and supervised cross-service lesson acceptance remain unverified.
@@ -452,8 +455,7 @@ automatically for trusted, verified learning milestones. See
   per-lesson caps, reconciliation and mentor audit/reversal workflow.
 - [ ] Obtain mentor approval of proposed reward weights (5/2/2), provision
   consent and private credentials, and run supervised live acceptance.
-- [ ] Investigate reported Vercel homepage redesign deployment failure via
-  actual Vercel logs. GitHub CI success is not deployment verification.
+- [x] Investigate the historical Vercel homepage redesign failure via actual build logs: commit `e0b70cb` imported absent `./home.module.css`. The stylesheet is now present on `main`, and a subsequent production build is `READY`.
 
 ### Private learning materials — five-feature delivery batch
 
