@@ -1,5 +1,10 @@
 # Eric — A Learning Journey
 
+## Dependency maintenance — 17 November 2026
+
+- [x] Update Next.js from 16.4.2 to 16.4.6 and `@vercel/functions` from 3.10.1 to 3.11.3, including lockfile changes, to address the reported dependency advisories. Preserve the existing Node 24 runtime and React versions.
+- [ ] Verify the upgraded release through CI and production deployment; record current npm audit and regression results before closing acceptance.
+
 ## Eric’s Journal — agreed feature scope (17 November 2026)
 
 **Status: first five capabilities implemented; isolated hosted HTTP acceptance passed (17 November 2026).** Video delivery and actual-device acceptance remain open. The owner confirmed **“Write an article”** as the student dashboard action and **“Eric’s Journal”** as the public section name. This is an additional publishing feature alongside the existing learning studio and growth tracker.
