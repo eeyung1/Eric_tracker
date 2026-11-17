@@ -5,7 +5,8 @@
 - [x] Make Eric’s Journal the main hero button and first discovery card; retain access to growth tracking and encouragement.
 - [x] Label student access consistently as Student login, with a visible header button outside the collapsed phone menu and a full-width mobile hero button.
 - [x] Preserve themes, motion preferences and keyboard focus; keep mentor access at `/admin` rather than public navigation.
-- [ ] Verify responsive rendering, tests/build, CI and production deployment.
+- [x] 122 tests, production build and CI passed; PR #60 merged and production deployment is READY. Verified journal/student entry points on ericushie.com. Browser checks at approximately 340, 545 and 1350 CSS pixels found no horizontal overflow; the mobile menu opens and student login remains visible.
+- [ ] Physical-phone acceptance remains open; narrow browser checks used page zoom, not device emulation.
 
 
 ## Document-to-lesson foundation — 17 November 2026
