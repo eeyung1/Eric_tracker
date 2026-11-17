@@ -58,8 +58,10 @@ Eric signs in through the existing student login, opens **Write an article** bes
 - [x] Published playback below writing, native responsive controls, byte-range seeking and no autoplay. Every playback request checks publication or authenticated ownership; unpublish denies new public requests immediately.
 - [x] Migration 008 applied to isolated acceptance, development and production; 122 tests and production build pass.
 - [x] Hosted private MP4 upload, size rejection, owner/origin denial, completion, playback, range/suffix seeking, HEAD/416, published placement and unpublish privacy verified on isolated preview.
-- [ ] Verify production deployment after CI and merge.
+- [x] PR #58 merged after green CI; production deployment `dpl_3JXrxL5ems5Ruu4mMCgakQrQTVE1` is READY and assigned to ericushie.com. No production test articles or videos were created.
 - [ ] Physical phone acceptance with Eric's own MP4/WebM files; codec compatibility depends on browser. H.264/AAC MP4 is recommended.
+
+Hosted checks also verified ready/unfinished removal with isolated fixture timestamps advanced; immediate removal is denied while the token remains live.
 
 Uploads are stored privately; storage URLs and credentials are never returned to journal readers. Removal waits until eleven minutes after upload authorization, preventing an outstanding upload token from recreating a removed file. Failed transfers reserve a slot until removed; “Verify completed upload” recovers completed transfers after a network interruption. Unpublishing blocks new playback requests; already buffered/downloaded video cannot be recalled. Original video metadata is retained: check personal details before publishing. Storage/transfer count toward the connected Vercel plan's usage allowance; no plan upgrade was requested.
 
