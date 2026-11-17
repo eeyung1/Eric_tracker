@@ -9,9 +9,9 @@
     "test": "node --test tests/*.test.js"
   },
   "dependencies": {
-    "@vercel/functions": "3.10.1",
+    "@vercel/functions": "3.11.3",
     "fflate": "0.8.3",
-    "next": "16.4.2",
+    "next": "16.4.6",
     "pdfjs-dist": "6.5.438",
     "pg": "8.23.1",
     "react": "19.3.1",
