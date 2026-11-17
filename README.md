@@ -1,5 +1,36 @@
 # Eric — A Learning Journey
 
+## Eric’s Journal — agreed feature scope (17 November 2026)
+
+**Status: planned; implementation has not started.** The owner confirmed **“Write an article”** as the student dashboard action and **“Eric’s Journal”** as the public section name. This is an additional publishing feature alongside the existing learning studio and growth tracker.
+
+Eric signs in through the existing student login, opens **Write an article** beside **Go to learning studio** and **Explore my tools**, and writes about his day, lectures, hostel experiences, programming or something he learned. He can save a private draft, preview it and explicitly publish it. Public visitors discover published articles from the homepage and journal index.
+
+### Intended pages and experience
+
+| Location | Planned behavior |
+|---|---|
+| Student dashboard `/student` | Add **Write an article** without removing the existing studio/tools actions. |
+| Private `/student/articles` | List Eric’s drafts and published articles; create, edit, preview and unpublish. |
+| Private article editor | Title, optional summary, article body, top-of-article photo upload with alternative text/captions, and optional bottom-of-article video. |
+| Public `/journal` | **Eric’s Journal** index showing published articles with title, summary, date and cover image when present. |
+| Public `/journal/[slug]` | Photos above the write-up; readable article body; optional video below the write-up. |
+| Homepage and public navigation | **Eric’s Journal** link and a compact latest-published-articles section; honest empty state until Eric publishes. |
+
+### Implementation sequence and acceptance checklist
+
+- [ ] **1. Article data and authorization:** add a versioned Neon migration for learner-owned articles, draft/published status, stable unique slugs and publication/update timestamps. Derive ownership from the authenticated student session; enforce same-origin checks, validation and rate limiting for writes. Public endpoints must return published content only.
+- [ ] **2. Private writing workflow:** add the dashboard action, article manager and responsive editor; support save draft, preview, explicit publish, edit and unpublish with clear progress, errors and unsaved-change protection. Never publish on draft save or preview.
+- [ ] **3. Photo uploads:** support a cover photo and optional additional photos above the text, with alternative text and optional captions. Validate actual file content, byte/dimension/count limits and safe formats; keep draft media private and authorize media access against the parent article’s current publication state. Document storage, removal and orphan cleanup.
+- [ ] **4. Optional video:** render one optional video below the article body with accessible, responsive controls and no autoplay. Select and document direct upload versus an approved embed approach before implementing this step; define file/provider limits, storage/bandwidth expectations and draft privacy. The video delivery method is not yet agreed.
+- [ ] **5. Public journal:** build the published-only journal index and article pages, readable mobile/laptop layouts, appropriate metadata, stable links and safe rendering of article content. Unpublishing must remove public article and media access, including cache invalidation; externally saved copies cannot be recalled.
+- [ ] **6. Homepage discovery:** add the journal link and latest published articles using bounded public data; preserve existing learning journey, tracker and studio navigation. Do not seed invented personal articles or expose drafts in previews, metadata or feeds.
+- [ ] **7. Verification and release:** test unauthorized writes, ownership isolation, draft/media privacy, upload validation, publish/edit/unpublish and public visibility; run tests/build/CI, verify the hosted flow with disposable content in an isolated preview, and complete actual-phone/laptop acceptance. Keep production free of demo content.
+
+**Publishing behavior:** Eric is the author and can publish through his student session; routine article publication does not require a mentor approval queue. Include a short pre-publication reminder to check personal details and permission from people pictured or mentioned. Article publishing does not award automatic learning points; the existing verified 5/2/2 lesson reward work remains separate.
+
+**Delivery workflow:** branch → implement → test/build → push → PR → required CI → review → merge; update these checkboxes only for completed work and record hosted acceptance separately. No co-authored commit trailers. Begin with data/authorization and drafts, then media, publication and homepage discovery.
+
 ## Responsive usability update — 17 November 2026
 
 - [x] Fix password visibility control inheriting full-width global buttons; keep the password field and Show/Hide control separate.
