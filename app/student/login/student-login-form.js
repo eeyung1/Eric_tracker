@@ -24,14 +24,14 @@ export default function StudentLoginForm(){
   }catch{setMessage('Connection unavailable. Please try again.');}
   finally{setPending(false);}
  }
- return <form onSubmit={submit} className={styles.form} aria-labelledby="student-login-title">
+ return <form aria-busy={pending} onSubmit={submit} className={styles.form} aria-labelledby="student-login-title">
   <div className={styles.formIcon} aria-hidden="true">↗</div>
   <p className={styles.eyebrow}>PRIVATE STUDENT ACCESS</p>
   <h1 id="student-login-title">Welcome back, Eric.</h1>
   <p className={styles.description}>Sign in to open your dashboard and continue your learning journey.</p>
   <label htmlFor="student-password" className={styles.label}>Your password</label>
   <div className={styles.passwordField}>
-  <input id="student-password" type={visible?"text":"password"} autoComplete="current-password" required minLength={12} maxLength={256}
+  <input id="student-password" name="password" autoCapitalize="none" spellCheck={false} type={visible?"text":"password"} autoComplete="current-password" required minLength={12} maxLength={256}
    value={password} onChange={e=>setPassword(e.target.value)}
    aria-invalid={!!message} aria-describedby={message?"student-login-error":undefined}/>
    <button className={styles.reveal} type="button" aria-label={visible?"Hide password":"Show password"} aria-pressed={visible} onClick={()=>setVisible(v=>!v)}>{visible?"Hide":"Show"}</button></div>

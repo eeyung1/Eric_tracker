@@ -132,3 +132,7 @@
 @media(max-width:850px){.workspaceGrid{grid-template-columns:1fr}.hero{min-height:290px}.nextStep{gap:10px}.nextStep h2{margin:10px 0}.sectionHeading{margin-top:30px}}
 @media(max-width:700px){.dashboard{padding:16px 14px 80px}.nav{padding:10px 12px}.workspaceGrid{gap:12px;margin-top:15px}.hero{padding:26px 21px;min-height:310px;border-radius:20px}.hero h1{font-size:clamp(2.25rem,9vw,3.4rem)}.hero p:last-child{font-size:14px}.heroActions{width:100%}.heroSecondary{border-color:#ffffff75}.nextStep{padding:23px;border-radius:19px}.sectionHeading{align-items:start;flex-direction:column;gap:7px}.sectionHint{display:none}.tools{gap:12px}.primaryCard,.secondaryCard{min-height:0}.progressLink{margin-top:12px}}
 @media(prefers-reduced-motion:reduce){.nextStep>a,.progressLink{scroll-behavior:auto}}
+
+.workspaceGrid>*,.tools>*{min-width:0}
+.navActions{flex-wrap:wrap}
+@media(max-width:480px){.dashboard{padding-inline:0}.nav{gap:8px}.navActions{width:100%;justify-content:space-between}.heroActions{display:grid;gap:10px}.tools{grid-template-columns:minmax(0,1fr)}}

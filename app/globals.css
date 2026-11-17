@@ -397,3 +397,16 @@ body{background:var(--bg)}
  .admin-workspace .admin-form-panel{border-radius:18px}
 }
 @media(prefers-reduced-motion:reduce){.admin-workspace .admin-section-nav button{transition:none}}
+
+/* Responsive shared chrome: comfortable laptop width and compact phone controls. */
+body{width:100%;padding-inline:clamp(16px,3vw,36px)}
+.public-shell{min-width:0}
+.public-header nav a,.public-footer nav a{min-height:44px;display:inline-flex;align-items:center}
+@media(max-width:760px){
+ .public-shell .public-header{padding:16px 0;gap:12px}
+ .personal-header .site-preferences{justify-content:space-between;gap:8px}
+ .site-preferences>*{min-width:0}
+ .public-theme select{max-width:100%;font-size:12px}
+ .public-footer{gap:16px;flex-wrap:wrap;padding-block:24px}
+ .public-footer nav{display:flex;flex-wrap:wrap;gap:4px 16px}
+}
