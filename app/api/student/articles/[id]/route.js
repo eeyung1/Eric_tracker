@@ -7,10 +7,12 @@ export async function PATCH(request,{params}){try{const owner=await articleWrite
  await transaction(async client=>{const item=await lockedArticle(client,id,owner,expected);
   if(data.action==='save'){
    if(item.status!=='draft')throw new HttpError(409,'Unpublish this article before editing.');const f=articleFields(data),videoId=youtubeVideoId(data.videoUrl);
+   if(videoId){const {rows}=await client.query('SELECT id FROM article_videos WHERE article_id=$1',[id]);if(rows.length)throw new HttpError(409,'Remove your uploaded video before adding a YouTube link.');}
    await client.query('UPDATE student_articles SET title=$1,summary=$2,body=$3,video_id=CASE WHEN $4 THEN $5 ELSE video_id END,revision=revision+1,updated_at=now() WHERE id=$6 AND learner_id=$7',[f.title,f.summary,f.body,Object.hasOwn(data,'videoUrl'),videoId,id,owner]);
   }else if(data.action==='publish'){
    if(item.status!=='draft')throw new HttpError(409,'This article is already published.');
    if(data.confirmPublic!==true)throw new HttpError(400,'Confirm that this article, photos and video link will be public.');
+   const {rows:pending}=await client.query('SELECT id FROM article_videos WHERE article_id=$1 AND NOT ready',[id]);if(pending.length)throw new HttpError(409,'Finish or remove the pending video before publishing.');
    const {rows:[draft]}=await client.query('SELECT body FROM student_articles WHERE id=$1',[id]);if(!draft.body.trim())throw new HttpError(400,'Write your article before publishing.');
    await client.query("UPDATE student_articles SET status='published',published_at=COALESCE(published_at,now()),revision=revision+1,updated_at=now() WHERE id=$1 AND learner_id=$2",[id,owner]);
   }else if(data.action==='unpublish'){
