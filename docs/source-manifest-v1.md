@@ -15,7 +15,7 @@ The shared fixture at `tests/fixtures/source_v1.json` is also in SoTeach at `ses
 
 ## Binding and citations
 
-SoTeach now has domain methods to bind a manifest before diagnosis, preserve it through memory/file snapshot resume, reject replacement, and resolve only citations belonging to that binding. Session getters and stores copy passages rather than sharing mutable caller memory. A genuinely new subject/topic clears the old binding; resuming the same topic retains it. PostgreSQL uses the same optional snapshot field and validates it on load, but live Postgres restart acceptance for bound sources remains pending.
+SoTeach now has domain methods to bind a manifest before diagnosis, preserve it through memory/file snapshot resume, reject replacement, and resolve only citations belonging to that binding. Session getters and stores copy passages rather than sharing mutable caller memory. A genuinely new subject/topic clears the old binding; resuming or resetting an attempt on the same topic retains it. PostgreSQL uses the same optional snapshot field and validates it on load, but live Postgres restart acceptance for bound sources remains pending.
 
 These are domain primitives, not a source-grounded teaching endpoint. They do not establish ownership or guardian consent; the future authorized API must do that before binding. Content hashes identify a version, not the truth or authenticity of a document. Uploaded text is untrusted data and must never be executed as instructions or allowed to override tutor rules. The existing topic tutor, public APIs and points remain unchanged.
 
@@ -24,3 +24,7 @@ The new `:sN` citation namespace belongs to this versioned manifest. Do not feed
 ## Next dependency
 
 Implement consented/scoped transfer and actual source-grounded authoring, validate evidence and citations, then wire begin/answer/resume to the bound document. Do not label a generic topic lesson as document-grounded merely because a manifest is present. Deletion/revocation, retention and cross-service restart acceptance remain open before real-document transfer.
+
+## Acceptance — 17 November 2026
+
+119 JavaScript tests and production build passed. Hosted private preview checks passed for text/PDF/DOCX hashes and provenance, anonymous/cross-learner denial, no-store, unsupported POST, explicit 422 on excessive passages and 404 after deletion. Synthetic materials stayed on an isolated Neon branch and were deleted after testing. Go domain tests initially failed for missing primitives; the complete suite and vet now pass, including two review regressions for same-topic retries and HTML-like plain text payload sizing. Live source-bound PostgreSQL restart and Render cross-service teaching acceptance remain open.

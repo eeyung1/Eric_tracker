@@ -8,6 +8,8 @@
 - [x] Share a wire fixture and limits with SoTeach’s tested immutable session-binding foundation.
 - [ ] Send approved sources to a guardian-consented, scoped SoTeach endpoint and start/answer/resume an actual document-grounded lesson with validated citations.
 
+**Verified:** 119 local tests and production build pass. Isolated hosted checks passed for owned text/PDF/DOCX source versions, original page/paragraph provenance, authentication/cross-learner denial, no-store behavior, unsupported POST rejection, excessive-passage rejection and deletion. Synthetic test materials were removed from the isolated preview; no production material was sent or created for acceptance. SoTeach’s matching domain primitives pass the full Go suite and vet, including file restart, mutation isolation, immutable citations and same-topic retry retention.
+
 **No document transfer, document-grounded tutoring or automatic learning rewards are enabled by this change.** Source contract and remaining dependencies: [`docs/source-manifest-v1.md`](docs/source-manifest-v1.md).
 
 ## Dependency maintenance — 17 November 2026
