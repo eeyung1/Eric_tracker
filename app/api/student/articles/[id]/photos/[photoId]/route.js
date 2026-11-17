@@ -1,0 +1,5 @@
+import {articleWrite,articleFailure,articleHeaders,lockedArticle,ownedArticle,transaction,HttpError} from '../../../../../../../lib/article-server.js';
+import {articleJson,articleId,revision} from '../../../../../../../lib/article-validation.js';
+export const runtime='nodejs';export const dynamic='force-dynamic';
+export async function DELETE(request,{params}){try{const owner=await articleWrite(request),{id,photoId}=await params,data=await articleJson(request);articleId(photoId);
+ await transaction(async client=>{const item=await lockedArticle(client,id,owner,revision(data.revision));if(item.status!=='draft')throw new HttpError(409,'Unpublish before changing photos.');const result=await client.query('DELETE FROM article_photos WHERE id=$1 AND article_id=$2',[photoId,id]);if(!result.rowCount)throw new HttpError(404,'Photo not found.');await client.query('UPDATE student_articles SET revision=revision+1,updated_at=now() WHERE id=$1',[id]);});return Response.json({article:await ownedArticle(id,owner)},{headers:articleHeaders});}catch(e){return articleFailure(e);}}
