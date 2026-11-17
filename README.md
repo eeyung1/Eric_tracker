@@ -1,5 +1,17 @@
 # Eric — A Learning Journey
 
+## Document-to-lesson foundation — 17 November 2026
+
+- [x] Prepare a complete `soteach.source.v1` manifest from private learner-owned materials, with content SHA-256, ordered passage IDs and original PDF page/DOCX paragraph references.
+- [x] Fail explicitly on incomplete, mismatched or oversized sources instead of silently truncating a lesson source; preserve Unicode characters across chunk boundaries.
+- [x] Extend the private selection preview with source-version metadata and complete passage count; retain student authentication, ownership and no-store behavior.
+- [x] Share a wire fixture and limits with SoTeach’s tested immutable session-binding foundation.
+- [ ] Send approved sources to a guardian-consented, scoped SoTeach endpoint and start/answer/resume an actual document-grounded lesson with validated citations.
+
+**Verified:** 119 local tests and production build pass. Isolated hosted checks passed for owned text/PDF/DOCX source versions, original page/paragraph provenance, authentication/cross-learner denial, no-store behavior, unsupported POST rejection, excessive-passage rejection and deletion. Synthetic test materials were removed from the isolated preview; no production material was sent or created for acceptance. SoTeach’s matching domain primitives pass the full Go suite and vet, including file restart, mutation isolation, immutable citations and same-topic retry retention.
+
+**No document transfer, document-grounded tutoring or automatic learning rewards are enabled by this change.** Source contract and remaining dependencies: [`docs/source-manifest-v1.md`](docs/source-manifest-v1.md).
+
 ## Dependency maintenance — 17 November 2026
 
 - [x] Update Next.js from 16.4.2 to 16.4.6 and `@vercel/functions` from 3.10.1 to 3.11.3, including lockfile changes, to address the reported dependency advisories. Preserve the existing Node 24 runtime and React versions.

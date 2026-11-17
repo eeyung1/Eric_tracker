@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "soteach.source.v1",
+  "documentId": "material-001",
+  "version": "978772bd5620a7aa5020229f82787d7ffd4d19e8b3f311930ccc469d7d8d6d70",
+  "title": "Biology notes",
+  "content": "Cells divide.\n\nDNA carries information.",
+  "passages": [
+    {
+      "sourceId": "material-001:s1",
+      "page": 1,
+      "text": "Cells divide."
+    },
+    {
+      "sourceId": "material-001:s2",
+      "page": 2,
+      "text": "DNA carries information."
+    }
+  ]
+}
