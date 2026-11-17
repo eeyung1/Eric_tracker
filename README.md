@@ -19,7 +19,7 @@
 
 ## Eric’s Journal — agreed feature scope (17 November 2026)
 
-**Status: articles, photos and optional YouTube video links implemented; isolated hosted HTTP acceptance passed (17 November 2026).** Actual-device editor acceptance remains open. The owner confirmed **“Write an article”** as the student dashboard action and **“Eric’s Journal”** as the public section name. This is an additional publishing feature alongside the existing learning studio and growth tracker.
+**Status: articles, photos, YouTube links and private direct video uploads implemented; isolated hosted HTTP acceptance passed (17 November 2026).** Actual-device editor acceptance remains open. The owner confirmed **“Write an article”** as the student dashboard action and **“Eric’s Journal”** as the public section name. This is an additional publishing feature alongside the existing learning studio and growth tracker.
 
 Eric signs in through the existing student login, opens **Write an article** beside **Go to learning studio** and **Explore my tools**, and writes about his day, lectures, hostel experiences, programming or something he learned. He can save a private draft, preview it and explicitly publish it. Public visitors discover published articles from the homepage and journal index.
 
@@ -56,8 +56,9 @@ Eric signs in through the existing student login, opens **Write an article** bes
 - [x] One MP4/WebM file per article, maximum 50 MiB; maximum ten stored/pending videos per learner. YouTube remains available as an alternative.
 - [x] Session/owner/origin-protected, revision-checked upload authorization; scoped ten-minute tokens, server-side size/MIME/container checks, private preview, progress and retry verification.
 - [x] Published playback below writing, native responsive controls, byte-range seeking and no autoplay. Every playback request checks publication or authenticated ownership; unpublish denies new public requests immediately.
-- [x] Migration 008 and tests/build implemented.
-- [ ] Hosted upload/playback/seek/unpublish acceptance and deployment verification.
+- [x] Migration 008 applied to isolated acceptance, development and production; 122 tests and production build pass.
+- [x] Hosted private MP4 upload, size rejection, owner/origin denial, completion, playback, range/suffix seeking, HEAD/416, published placement and unpublish privacy verified on isolated preview.
+- [ ] Verify production deployment after CI and merge.
 - [ ] Physical phone acceptance with Eric's own MP4/WebM files; codec compatibility depends on browser. H.264/AAC MP4 is recommended.
 
 Uploads are stored privately; storage URLs and credentials are never returned to journal readers. Removal waits until eleven minutes after upload authorization, preventing an outstanding upload token from recreating a removed file. Failed transfers reserve a slot until removed; “Verify completed upload” recovers completed transfers after a network interruption. Unpublishing blocks new playback requests; already buffered/downloaded video cannot be recalled. Original video metadata is retained: check personal details before publishing. Storage/transfer count toward the connected Vercel plan's usage allowance; no plan upgrade was requested.
