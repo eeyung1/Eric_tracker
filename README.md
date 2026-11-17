@@ -1,5 +1,12 @@
 # Eric — A Learning Journey
 
+## Responsive usability update — 17 November 2026
+
+- [x] Fix password visibility control inheriting full-width global buttons; keep the password field and Show/Hide control separate.
+- [x] Put student credentials first on phone/tablet screens; preserve the two-column welcome on laptops.
+- [x] Improve shared navigation touch targets, narrow-screen dashboard spacing and material-library action wrapping.
+- [ ] Complete Eric/guardian acceptance on their actual phone and laptop.
+
 ## MVP delivery dashboard — source of truth (reviewed 9 November 2026)
 
 > **Scope and evidence:** The checkboxes below distinguish code merged into `main`, infrastructure previously verified, and capabilities that still require live end-to-end acceptance. A passing unit test is **not** proof of an operating Render/Neon/Vercel integration. A feature present only in an open PR is **not** checked off as shipped. Older chronological sections below are retained as implementation history; where they contain outdated future-tense statements, this dashboard takes precedence. **MVP is not complete.**
