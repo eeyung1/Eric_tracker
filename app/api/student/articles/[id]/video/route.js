@@ -8,9 +8,9 @@ export const runtime='nodejs';export const dynamic='force-dynamic';
 export async function POST(request,{params}){try{
  const owner=await articleWrite(request),id=articleId((await params).id),data=await articleJson(request);
  if(data.type==='blob.generate-client-token'){
-  const payload=JSON.parse(data.payload?.clientPayload||'{}'),expected=revision(payload.revision);
+  let payload;try{payload=JSON.parse(data.payload?.clientPayload||'{}');if(!payload||typeof payload!=='object'||Array.isArray(payload))throw Error();}catch{throw new HttpError(400,'Invalid upload details.');}const expected=revision(payload.revision);
   const extension=videoFile(payload.name,payload.contentType,payload.size);
-  // Never let the browser choose a storage path or overwrite an existing upload.
+  // Scope authorization to one reserved path under the owned article, without overwrites.
   const result=await handleUpload({request,body:data,onBeforeGenerateToken:async pathname=>{
    if(pathname!==data.payload.pathname||!pathname.startsWith(`journal/${id}/`)||!/^journal\/[a-f0-9-]{36}\/[a-f0-9-]{36}\.(mp4|webm)$/.test(pathname)||!pathname.endsWith('.'+extension))throw new HttpError(400,'Invalid upload path.');
    await transaction(async client=>{const a=await lockedArticle(client,id,owner,expected);if(a.status!=='draft')throw new HttpError(409,'Unpublish before adding a video.');

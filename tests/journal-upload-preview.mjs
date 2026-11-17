@@ -5,7 +5,7 @@ import {upload} from '@vercel/blob/client';
 import {randomUUID} from 'node:crypto';
 let raw='';for await(const part of process.stdin)raw+=part;const c=JSON.parse(raw);
 if(!/^https:\/\/eric-tracker-[a-z0-9]+-eeyung1\.vercel\.app$/.test(c.base)||c.disposable!==true)throw Error('Isolated preview required');
-const nativeFetch=globalThis.fetch;globalThis.fetch=(url,options={})=>nativeFetch(url,{...options,headers:{...options.headers,...(String(url).startsWith(c.base+'/')?{cookie:c.cookie,origin:c.base}:{})}});
+const nativeFetch=globalThis.fetch;globalThis.fetch=async(url,options={})=>{const r=await nativeFetch(url,{...options,headers:{...options.headers,...(String(url).startsWith(c.base+'/')?{cookie:c.cookie,origin:c.base}:{})}});if(!r.ok&&String(url).startsWith(c.base+'/'))console.log('Upload API error',r.status,(await r.clone().text()).slice(0,300));return r;};
 async function call(path,options={},auth=true){return nativeFetch(c.base+path,{...options,signal:AbortSignal.timeout(40000),headers:{origin:c.base,...(auth?{cookie:c.cookie}:{}),...options.headers}});}
 async function check(r,status){console.log(r.status,new URL(r.url).pathname);assert.equal(r.status,status,(await r.clone().text()).slice(0,300));return r;}
 async function json(path,method,body){return call(path,{method,headers:{'content-type':'application/json'},body:JSON.stringify(body)});}
@@ -20,7 +20,7 @@ await check(await call(endpoint,{method:'POST',headers:{'content-type':'applicat
 await check(await call(endpoint,{method:'POST',headers:{'content-type':'application/json',origin:'https://attacker.invalid'},body:JSON.stringify(tokenBody)}),403);
 await check(await json(root+'/'+c.foreignId+'/video','POST',{...tokenBody,payload:{...tokenBody.payload,pathname:`journal/${c.foreignId}/${randomUUID()}.mp4`}}),404);
 await check(await json(endpoint,'POST',{...tokenBody,payload:{...tokenBody.payload,clientPayload:JSON.stringify({revision:a.revision,name:'large.mp4',size:52428801,contentType:'video/mp4'})}}),400);
-const blob=await upload(pathname,new Blob([bytes],{type:'video/mp4'}),{access:'private',handleUploadUrl:c.base+endpoint,clientPayload});
+const blob=await upload(pathname,new Blob([bytes],{type:'video/mp4'}),{access:'private',handleUploadUrl:c.base+endpoint,clientPayload,headers:{cookie:c.cookie,origin:c.base}});
 console.log('Private upload completed',bytes.length);
 assert.equal((await nativeFetch(blob.url)).status,403,'private storage never exposes the original');
 await check(await json(root+'/'+a.id,'PATCH',{action:'publish',revision:a.revision,confirmPublic:true}),409);
