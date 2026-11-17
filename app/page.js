@@ -7,8 +7,8 @@ import styles from './home.module.css';
 export const metadata={title:"Eric Tracker | Every step counts",description:"Explore Eric's learning progress, celebrate effort, and support his next big step."};
 
 const pathways=[
- {number:'01',tag:'THE JOURNEY',title:'See the growth.',body:'A clear picture of the little wins, big breakthroughs, and effort behind every milestone.',href:'/tracker',cta:'Explore the tracker',symbol:'↗'},
- {number:'02',tag:'THE METHOD',title:'Know what counts.',body:'Discover how curiosity, consistency and real understanding turn into meaningful recognition.',href:'/criteria',cta:'See point criteria',symbol:'✳'},
+ {number:'01',tag:'ERIC’S JOURNAL',title:'Read his stories.',body:'Reflections on learning, lectures and everyday life, shared by Eric in his own words.',href:'/journal',cta:'Read Eric’s Journal',symbol:'✎'},
+ {number:'02',tag:'THE JOURNEY',title:'See the growth.',body:'A clear picture of the little wins, big breakthroughs, and effort behind every milestone.',href:'/tracker',cta:'Explore the tracker',symbol:'↗'},
  {number:'03',tag:'THE COMMUNITY',title:'Cheer him on.',body:'A kind word can change a day. Add encouragement to keep the momentum going.',href:'/tracker#encouragement',cta:'Leave encouragement',symbol:'♡'}
 ];
 
@@ -16,9 +16,9 @@ export default function Home(){return <div className={styles.site}><a className=
  <section className={styles.hero} aria-labelledby="home-title">
   <div className={styles.heroCopy}><div className={styles.eyebrow}><span className={styles.sparkle}>✳</span> ERIC'S LEARNING UNIVERSE <span className={styles.eyebrowLine}/></div>
    <h1 id="home-title">Small steps.<br/><span>Big becoming.</span></h1>
-   <p className={styles.intro}>A space built around one powerful idea: progress isn't just about results. It's about the courage to try, learn, and keep going.</p>
-   <div className={styles.actions}><Link href="/tracker" className={styles.primary}>Explore Eric's journey <span aria-hidden="true">↗</span></Link><Link href="/student/login" className={styles.secondary}>Enter learning studio <span aria-hidden="true">→</span></Link></div>
-   <div className={styles.heroNote}><span className={styles.noteStar}>✦</span><span>Curiosity first. Confidence follows.</span></div>
+   <p className={styles.intro}>Get to know the journey through Eric’s own words. Read his journal, follow his learning progress, and cheer him on along the way.</p>
+   <div className={styles.actions}><Link href="/journal" className={styles.primary}>Eric’s Journal <span aria-hidden="true">↗</span></Link><Link href="/student/login" className={styles.secondary}>Student login <span aria-hidden="true">→</span></Link></div>
+   <p className={styles.accessNote}>Visiting? Start with the journal. Eric? Sign in to learn and write.</p><Link href="/tracker" className={styles.journeyLink}>Follow Eric’s growth <span aria-hidden="true">↗</span></Link><div className={styles.heroNote}><span className={styles.noteStar}>✦</span><span>Curiosity first. Confidence follows.</span></div>
   </div>
   <div className={styles.art} aria-label="Illustration of Eric's growth journey"><div className={styles.orbitOne}/><div className={styles.orbitTwo}/><div className={styles.orbitThree}/><span className={styles.artSparkA}>✦</span><span className={styles.artSparkB}>✳</span><div className={styles.artCenter}><span className={styles.artInitial}>e<span>.</span></span><span className={styles.artCenterCaption}>KEEP GROWING</span></div><div className={styles.floatingOne}><span>↗</span> A LITTLE BETTER<br/>EVERY DAY</div><div className={styles.floatingTwo}><span>✳</span> MADE FOR<br/>THE CURIOUS</div><div className={styles.artBottom}>THE JOURNEY IS THE REWARD <span>✦</span> EST. 2026</div></div>
  </section>

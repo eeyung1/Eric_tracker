@@ -410,3 +410,9 @@ body{width:100%;padding-inline:clamp(16px,3vw,36px)}
  .public-footer{gap:16px;flex-wrap:wrap;padding-block:24px}
  .public-footer nav{display:flex;flex-wrap:wrap;gap:4px 16px}
 }
+
+/* Public entry points stay visible even when mobile navigation is closed. */
+.personal-header .header-access{display:flex;align-items:center;gap:8px;order:3;flex-shrink:0}.personal-header #public-main-nav{order:2}.personal-header .site-preferences{order:4}.student-login-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:46px;padding:11px 16px;border-radius:12px;background:#6241dc;color:#fff!important;text-decoration:none;font-size:13px;font-weight:800;white-space:nowrap;border:1px solid #6241dc}.student-login-button:hover{background:#5131c5}.student-login-button:focus-visible{outline:3px solid #d99514;outline-offset:4px}
+@media(max-width:1060px) and (min-width:761px){.personal-header #public-main-nav{order:5}.personal-header .header-access{margin-left:auto}.personal-header .site-preferences{margin-left:0}}
+@media(max-width:760px){.personal-header .header-access{grid-column:2;grid-row:1;order:2;gap:6px}.personal-header #public-main-nav{order:3}.personal-header .site-preferences{order:4}.student-login-button{min-height:44px;padding:10px 12px;font-size:12px;gap:8px}.personal-header .mobile-nav-toggle{padding:10px;min-width:44px}.personal-header .public-brand{min-width:0}.personal-header .site-preferences{justify-content:space-between}}
+@media(max-width:380px){.personal-header .menu-label{display:none}.personal-header .student-login-button{padding:10px;font-size:11px}.personal-header{column-gap:6px}}
