@@ -10,7 +10,7 @@
 .hero h1 span{color:var(--violet);font-style:italic}
 .intro{font-size:clamp(16px,1.45vw,19px);line-height:1.8;max-width:540px;color:#5d5676;margin-bottom:32px}
 .actions{display:flex;gap:13px;flex-wrap:wrap}.primary,.secondary{display:inline-flex;align-items:center;justify-content:space-between;gap:23px;min-height:55px;padding:16px 21px;border-radius:15px;font-size:13px;font-weight:850;transition:transform .2s,box-shadow .2s}
-.primary{background:var(--violet);color:white!important;box-shadow:0 13px 28px #6241dc33}.secondary{background:#fff;color:var(--ink)!important;border:1px solid #e5dcf5}.primary:hover,.secondary:hover{transform:translateY(-3px)}
+.primary{background:#6241dc;color:white!important;box-shadow:0 13px 28px #6241dc33}.secondary{background:var(--surface);color:var(--text)!important;border:1px solid var(--line)}.primary:hover,.secondary:hover{transform:translateY(-3px)}
 .heroNote{display:flex;gap:11px;align-items:center;margin-top:40px;color:#746b8a;font-size:12px;font-weight:700}.noteStar{color:#e2a42d;font-size:20px}
 .art{position:relative;aspect-ratio:1/1.02;max-width:610px;width:100%;margin:auto;overflow:hidden;isolation:isolate;border-radius:40px;background:radial-gradient(circle at 50% 42%,#7761d8 0%,#4b318f 50%,#221b53 100%);box-shadow:0 32px 70px #31206132}
 .orbitOne,.orbitTwo,.orbitThree{position:absolute;border:1px solid #ffffff45;border-radius:50%;left:50%;top:47%;transform:translate(-50%,-50%)}.orbitOne{width:60%;aspect-ratio:1}.orbitTwo{width:87%;aspect-ratio:1}.orbitThree{width:116%;aspect-ratio:1}
@@ -37,3 +37,6 @@
 :global([data-theme="dark"]) .site .pathCard:nth-child(3){background:#233c39}
 :global([data-theme="dark"]) .site .pathCard p{color:#d6cde8}
 :global([data-theme="dark"]) .site .cardLink{color:#cfbaff}
+
+.accessNote{font-size:13px;line-height:1.65;color:var(--muted);max-width:440px;margin:16px 0 14px}.journeyLink{display:inline-flex;align-items:center;gap:14px;min-height:44px;font-size:14px;font-weight:750;color:var(--violet)}.heroNote{margin-top:20px}.actions a{font-size:15px}.primary{min-width:200px}.secondary{min-width:170px}
+@media(max-width:650px){.accessNote{font-size:12px;margin-top:14px}.hero{padding-top:26px}.heroNote{margin-top:12px}.primary,.secondary{min-width:0}.journeyLink{font-size:13px}}

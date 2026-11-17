@@ -1,5 +1,13 @@
 # Eric — A Learning Journey
 
+## Landing-page discovery — 17 November 2026
+
+- [x] Make Eric’s Journal the main hero button and first discovery card; retain access to growth tracking and encouragement.
+- [x] Label student access consistently as Student login, with a visible header button outside the collapsed phone menu and a full-width mobile hero button.
+- [x] Preserve themes, motion preferences and keyboard focus; keep mentor access at `/admin` rather than public navigation.
+- [ ] Verify responsive rendering, tests/build, CI and production deployment.
+
+
 ## Document-to-lesson foundation — 17 November 2026
 
 - [x] Prepare a complete `soteach.source.v1` manifest from private learner-owned materials, with content SHA-256, ordered passage IDs and original PDF page/DOCX paragraph references.
