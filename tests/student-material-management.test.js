@@ -24,3 +24,9 @@ test('library provides search, export and rename without automatic points',()=>{
  assert.match(client,/download/);
  assert.doesNotMatch(client,/awardPoints|creditPoints/);
 });
+test('material list keeps titles readable by wrapping actions below narrow titles',()=>{
+ const css=read('../app/student/materials/materials.module.css');
+ assert.match(css,/\.list li\{flex-wrap:wrap\}/);
+ assert.match(css,/\.list li>div:first-child\{flex:1 1 14rem;min-width:min\(100%,14rem\)\}/);
+ assert.match(css,/\.actions\{flex:0 1 auto;max-width:100%\}/);
+});
